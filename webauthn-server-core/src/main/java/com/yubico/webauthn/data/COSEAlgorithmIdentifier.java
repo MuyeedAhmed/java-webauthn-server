@@ -39,13 +39,11 @@ import lombok.Getter;
  * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#typedefdef-cosealgorithmidentifier">§5.10.5.
  * Cryptographic Algorithm Identifier (typedef COSEAlgorithmIdentifier)</a>
  */
-@JsonSerialize(using = JsonLongSerializer.class)
 public enum COSEAlgorithmIdentifier implements JsonLongSerializable {
     EdDSA(-8),
     ES256(-7),
     RS256(-257);
 
-    @Getter
     private final long id;
 
     COSEAlgorithmIdentifier(long id) {
@@ -56,7 +54,6 @@ public enum COSEAlgorithmIdentifier implements JsonLongSerializable {
         return Stream.of(values()).filter(v -> v.id == id).findAny();
     }
 
-    @JsonCreator
     private static COSEAlgorithmIdentifier fromJson(long id) {
         return fromId(id).orElseThrow(() -> new IllegalArgumentException("Unknown COSE algorithm identifier: " + id));
     }

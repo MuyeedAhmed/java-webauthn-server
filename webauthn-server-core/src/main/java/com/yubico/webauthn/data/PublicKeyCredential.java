@@ -43,14 +43,11 @@ import lombok.Value;
  * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#iface-pkcredential">§5.1. PublicKeyCredential
  * Interface</a>
  */
-@Value
-@Builder(toBuilder = true)
 public class PublicKeyCredential<A extends AuthenticatorResponse, B extends ClientExtensionOutputs> {
 
     /**
      * The raw Credential ID of this credential, corresponding to the <code>rawId</code> attribute in the WebAuthn API.
      */
-    @NonNull
     private final ByteArray id;
 
     /**
@@ -65,29 +62,24 @@ public class PublicKeyCredential<A extends AuthenticatorResponse, B extends Clie
      * be an {@link AuthenticatorAssertionResponse}.
      * </p>
      */
-    @NonNull
     private final A response;
 
     /**
      * A map containing extension identifier → client extension output entries produced by the extension’s client
      * extension processing.
      */
-    @NonNull
     private final B clientExtensionResults;
 
     /**
      * The {@link PublicKeyCredential}'s type value is the string "public-key".
      */
-    @NonNull
-    @Builder.Default
     private final PublicKeyCredentialType type = PublicKeyCredentialType.PUBLIC_KEY;
 
-    @JsonCreator
     private PublicKeyCredential(
-        @NonNull @JsonProperty("id") ByteArray id,
-        @NonNull @JsonProperty("response") A response,
-        @NonNull @JsonProperty("clientExtensionResults") B clientExtensionResults,
-        @NonNull @JsonProperty("type") PublicKeyCredentialType type
+        ByteArray id,
+        A response,
+        B clientExtensionResults,
+        PublicKeyCredentialType type
     ) {
         this.id = id;
         this.response = response;
@@ -104,7 +96,6 @@ public class PublicKeyCredential<A extends AuthenticatorResponse, B extends Clie
             return new MandatoryStages(this);
         }
 
-        @AllArgsConstructor
         public class MandatoryStages {
             private final PublicKeyCredentialBuilder<A, B> builder;
 

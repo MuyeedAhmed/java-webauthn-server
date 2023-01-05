@@ -35,7 +35,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.asn1.ASN1Primitive;
 import org.bouncycastle.asn1.DEROctetString;
 
-@Slf4j
 public final class ExtensionMatcher implements DeviceMatcher {
     private static final Charset CHARSET = Charset.forName("UTF-8");
 

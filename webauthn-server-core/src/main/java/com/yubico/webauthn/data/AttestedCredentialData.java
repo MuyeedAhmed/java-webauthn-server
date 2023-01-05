@@ -37,35 +37,29 @@ import lombok.Value;
  * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#sec-attested-credential-data">6.4.1. Attested
  * Credential Data</a>
  */
-@Value
-@Builder(toBuilder = true)
 public class AttestedCredentialData {
 
     /**
      * The AAGUID of the authenticator.
      */
-    @NonNull
     private final ByteArray aaguid;
 
     /**
      * The credential ID of the attested credential.
      */
-    @NonNull
     private final ByteArray credentialId;
 
     /**
      * The credential public key encoded in COSE_Key format, as defined in Section 7 of <a
      * href="https://tools.ietf.org/html/rfc8152">RFC 8152</a>.
      */
-    @NonNull
     // TODO: verify requirements https://www.w3.org/TR/webauthn/#sec-attestation-data
     private final ByteArray credentialPublicKey;
 
-    @JsonCreator
     private AttestedCredentialData(
-        @NonNull @JsonProperty("aaguid") ByteArray aaguid,
-        @NonNull @JsonProperty("credentialId") ByteArray credentialId,
-        @NonNull @JsonProperty("credentialPublicKey") ByteArray credentialPublicKey
+        ByteArray aaguid,
+        ByteArray credentialId,
+        ByteArray credentialPublicKey
     ) {
         this.aaguid = aaguid;
         this.credentialId = credentialId;

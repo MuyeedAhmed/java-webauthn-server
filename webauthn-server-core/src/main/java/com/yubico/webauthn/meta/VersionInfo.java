@@ -42,8 +42,6 @@ import lombok.extern.slf4j.Slf4j;
  *
  * @see Specification
  */
-@Slf4j
-@Value
 public class VersionInfo {
 
     private static VersionInfo instance;

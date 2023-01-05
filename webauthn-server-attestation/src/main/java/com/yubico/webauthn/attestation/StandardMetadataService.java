@@ -48,9 +48,7 @@ public final class StandardMetadataService implements MetadataService {
     private final Cache<String, Attestation> cache;
 
     private StandardMetadataService(
-        @NonNull
         AttestationResolver attestationResolver,
-        @NonNull
         Cache<String, Attestation> cache
     ) {
         this.attestationResolver = attestationResolver;
@@ -124,7 +122,7 @@ public final class StandardMetadataService implements MetadataService {
      * @return An attestation as described above.
      */
     @Override
-    public Attestation getAttestation(@NonNull List<X509Certificate> attestationCertificateChain) throws CertificateEncodingException {
+    public Attestation getAttestation(List<X509Certificate> attestationCertificateChain) throws CertificateEncodingException {
         if (attestationCertificateChain.isEmpty()) {
             return unknownAttestation;
         }

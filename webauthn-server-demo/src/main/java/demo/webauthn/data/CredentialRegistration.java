@@ -35,9 +35,6 @@ import lombok.Builder;
 import lombok.Value;
 import lombok.experimental.Wither;
 
-@Value
-@Builder
-@Wither
 public class CredentialRegistration {
 
     long signatureCount;
@@ -45,13 +42,11 @@ public class CredentialRegistration {
     UserIdentity userIdentity;
     Optional<String> credentialNickname;
 
-    @JsonIgnore
     Instant registrationTime;
     RegisteredCredential credential;
 
     Optional<Attestation> attestationMetadata;
 
-    @JsonProperty("registrationTime")
     public String getRegistrationTimestamp() {
         return registrationTime.toString();
     }

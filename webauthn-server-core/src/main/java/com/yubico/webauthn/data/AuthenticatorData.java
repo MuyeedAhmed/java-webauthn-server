@@ -58,8 +58,6 @@ import lombok.Value;
  *
  * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#sec-authenticator-data">§6.1. Authenticator Data</a>
  */
-@Value
-@JsonSerialize(using = AuthenticatorData.JsonSerializer.class)
 public class AuthenticatorData {
 
     /**
@@ -68,13 +66,11 @@ public class AuthenticatorData {
      * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#sec-authenticator-data">§6.1. Authenticator
      * Data</a>
      */
-    @NonNull
     private final ByteArray bytes;
 
     /**
      * The flags bit field.
      */
-    @NonNull
     private final transient AuthenticatorDataFlags flags;
 
     /**
@@ -86,10 +82,8 @@ public class AuthenticatorData {
      *
      * @see #flags
      */
-    @NonNull
     private final transient Optional<AttestedCredentialData> attestedCredentialData;
 
-    @NonNull
     private final transient Optional<CBORObject> extensions;
 
     private static final int RP_ID_HASH_INDEX = 0;
@@ -106,8 +100,7 @@ public class AuthenticatorData {
     /**
      * Decode an {@link AuthenticatorData} object from a raw authenticator data byte array.
      */
-    @JsonCreator
-    public AuthenticatorData(@NonNull ByteArray bytes) {
+    public AuthenticatorData(ByteArray bytes) {
         ExceptionUtil.assure(
             bytes.size() >= FIXED_LENGTH_PART_END_INDEX,
             "%s byte array must be at least %d bytes, was %d: %s",
@@ -142,7 +135,6 @@ public class AuthenticatorData {
     /**
      * The SHA-256 hash of the RP ID the credential is scoped to.
      */
-    @JsonProperty("rpIdHash")
     public ByteArray getRpIdHash() {
         return new ByteArray(Arrays.copyOfRange(bytes.getBytes(), RP_ID_HASH_INDEX, RP_ID_HASH_END));
     }
@@ -236,7 +228,6 @@ public class AuthenticatorData {
         }
     }
 
-    @Value
     private static class VariableLengthParseResult {
         Optional<AttestedCredentialData> attestedCredentialData;
         Optional<CBORObject> extensions;

@@ -48,9 +48,6 @@ import lombok.Value;
  *
  * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#extensions">§9. WebAuthn Extensions</a>
  */
-@Value
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder(toBuilder = true)
 public class ClientRegistrationExtensionOutputs implements ClientExtensionOutputs {
 
     @Override

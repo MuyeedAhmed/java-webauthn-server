@@ -54,8 +54,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import static com.yubico.internal.util.ExceptionUtil.assure;
 
-@Builder
-@Slf4j
 final class FinishRegistrationSteps {
 
     private static final String CLIENT_DATA_TYPE = "webauthn.create";
@@ -71,7 +69,6 @@ final class FinishRegistrationSteps {
     private final Optional<MetadataService> metadataService;
     private final CredentialRepository credentialRepository;
 
-    @Builder.Default
     private final boolean allowUnrequestedExtensions = false;
 
 
@@ -119,7 +116,6 @@ final class FinishRegistrationSteps {
         }
     }
 
-    @Value
     class Step1 implements Step<Step2> {
         @Override
         public void validate() {}
@@ -135,7 +131,6 @@ final class FinishRegistrationSteps {
         }
     }
 
-    @Value
     class Step2 implements Step<Step3> {
         @Override
         public void validate() {
@@ -157,7 +152,6 @@ final class FinishRegistrationSteps {
         }
     }
 
-    @Value
     class Step3 implements Step<Step4> {
         private final CollectedClientData clientData;
 
@@ -187,7 +181,6 @@ final class FinishRegistrationSteps {
         }
     }
 
-    @Value
     class Step4 implements Step<Step5> {
         private final CollectedClientData clientData;
         private final List<String> prevWarnings;
@@ -206,7 +199,6 @@ final class FinishRegistrationSteps {
         }
     }
 
-    @Value
     class Step5 implements Step<Step6> {
         private final CollectedClientData clientData;
         private final List<String> prevWarnings;
@@ -225,7 +217,6 @@ final class FinishRegistrationSteps {
         }
     }
 
-    @Value
     class Step6 implements Step<Step7> {
         private final CollectedClientData clientData;
         private final List<String> prevWarnings;
@@ -241,7 +232,6 @@ final class FinishRegistrationSteps {
         }
     }
 
-    @Value
     class Step7 implements Step<Step8> {
         private final List<String> prevWarnings;
 
@@ -260,7 +250,6 @@ final class FinishRegistrationSteps {
         }
     }
 
-    @Value
     class Step8 implements Step<Step9> {
         private final ByteArray clientDataJsonHash;
         private final List<String> prevWarnings;
@@ -280,7 +269,6 @@ final class FinishRegistrationSteps {
         }
     }
 
-    @Value
     class Step9 implements Step<Step10> {
         private final ByteArray clientDataJsonHash;
         private final AttestationObject attestation;
@@ -300,7 +288,6 @@ final class FinishRegistrationSteps {
         }
     }
 
-    @Value
     class Step10 implements Step<Step11> {
         private final ByteArray clientDataJsonHash;
         private final AttestationObject attestation;
@@ -317,7 +304,6 @@ final class FinishRegistrationSteps {
         }
     }
 
-    @Value
     class Step11 implements Step<Step12> {
         private final ByteArray clientDataJsonHash;
         private final AttestationObject attestation;
@@ -336,7 +322,6 @@ final class FinishRegistrationSteps {
         }
     }
 
-    @Value
     class Step12 implements Step<Step13> {
         private final ByteArray clientDataJsonHash;
         private final AttestationObject attestation;
@@ -365,7 +350,6 @@ final class FinishRegistrationSteps {
         }
     }
 
-    @Value
     class Step13 implements Step<Step14> {
         private final ByteArray clientDataJsonHash;
         private final AttestationObject attestation;
@@ -399,7 +383,6 @@ final class FinishRegistrationSteps {
         }
     }
 
-    @Value
     class Step14 implements Step<Step15> {
         private final ByteArray clientDataJsonHash;
         private final AttestationObject attestation;
@@ -466,7 +449,6 @@ final class FinishRegistrationSteps {
         }
     }
 
-    @Value
     class Step15 implements Step<Step16> {
         private final AttestationObject attestation;
         private final AttestationType attestationType;
@@ -512,7 +494,6 @@ final class FinishRegistrationSteps {
         }
     }
 
-    @Value
     class Step16 implements Step<Step17> {
         private final AttestationObject attestation;
         private final AttestationType attestationType;
@@ -589,7 +570,6 @@ final class FinishRegistrationSteps {
         }
     }
 
-    @Value
     class Step17 implements Step<Step18> {
         private final AttestationType attestationType;
         private final Optional<Attestation> attestationMetadata;
@@ -607,7 +587,6 @@ final class FinishRegistrationSteps {
         }
     }
 
-    @Value
     class Step18 implements Step<Step19> {
         private final AttestationType attestationType;
         private final Optional<Attestation> attestationMetadata;
@@ -624,7 +603,6 @@ final class FinishRegistrationSteps {
         }
     }
 
-    @Value
     class Step19 implements Step<Finished> {
         private final AttestationType attestationType;
         private final Optional<Attestation> attestationMetadata;
@@ -641,7 +619,6 @@ final class FinishRegistrationSteps {
         }
     }
 
-    @Value
     class Finished implements Step<Finished> {
         private final AttestationType attestationType;
         private final Optional<Attestation> attestationMetadata;

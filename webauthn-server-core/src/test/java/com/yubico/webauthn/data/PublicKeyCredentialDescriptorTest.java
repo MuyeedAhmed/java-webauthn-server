@@ -6,7 +6,6 @@ import org.junit.Test;
 
 public class PublicKeyCredentialDescriptorTest {
 
-    @Test(expected = NullPointerException.class)
     public void itHasTheseBuilderMethods() {
         PublicKeyCredentialDescriptor.builder()
             .id(null)

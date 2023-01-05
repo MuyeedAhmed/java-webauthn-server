@@ -45,46 +45,38 @@ import org.checkerframework.checker.returnsrcvr.qual.This;
  * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#dictdef-publickeycredentialdescriptor">§5.10.3.
  * Credential Descriptor (dictionary PublicKeyCredentialDescriptor)</a>
  */
-@Value
-@Builder(toBuilder = true)
 public class PublicKeyCredentialDescriptor implements Comparable<PublicKeyCredentialDescriptor> {
 
     /**
      * The type of the credential the caller is referring to.
      */
-    @NonNull
-    @Builder.Default
     private final PublicKeyCredentialType type = PublicKeyCredentialType.PUBLIC_KEY;
 
     /**
      * The credential ID of the public key credential the caller is referring to.
      */
-    @NonNull
     private final ByteArray id;
 
     /**
      * An OPTIONAL hint as to how the client might communicate with the managing authenticator of the public key
      * credential the caller is referring to.
      */
-    @NonNull
-    @Builder.Default
     private final Optional<Set<AuthenticatorTransport>> transports = Optional.empty();
 
     private PublicKeyCredentialDescriptor(
-        @NonNull PublicKeyCredentialType type,
-        @NonNull ByteArray id,
-        @NonNull Optional<Set<AuthenticatorTransport>> transports
+        PublicKeyCredentialType type,
+        ByteArray id,
+        Optional<Set<AuthenticatorTransport>> transports
     ) {
         this.type = type;
         this.id = id;
         this.transports = transports.map(TreeSet::new).map(CollectionUtil::immutableSortedSet);
     }
 
-    @JsonCreator
     private PublicKeyCredentialDescriptor(
-        @NonNull @JsonProperty("type") PublicKeyCredentialType type,
-        @NonNull @JsonProperty("id") ByteArray id,
-        @JsonProperty("transports") Set<AuthenticatorTransport> transports
+        PublicKeyCredentialType type,
+        ByteArray id,
+        Set<AuthenticatorTransport> transports
     ) {
         this(type, id, Optional.ofNullable(transports));
     }
@@ -120,7 +112,7 @@ public class PublicKeyCredentialDescriptor implements Comparable<PublicKeyCreden
          * An OPTIONAL hint as to how the client might communicate with the managing authenticator of the public key
          * credential the caller is referring to.
          */
-        public @This PublicKeyCredentialDescriptorBuilder transports(@NonNull Optional<Set<AuthenticatorTransport>> transports) {
+        public PublicKeyCredentialDescriptorBuilder transports(Optional<Set<AuthenticatorTransport>> transports) {
             this.transports = transports;
             this.transports$set = true;
             return this;
@@ -130,7 +122,7 @@ public class PublicKeyCredentialDescriptor implements Comparable<PublicKeyCreden
          * An OPTIONAL hint as to how the client might communicate with the managing authenticator of the public key
          * credential the caller is referring to.
          */
-        public @This PublicKeyCredentialDescriptorBuilder transports(@NonNull Set<AuthenticatorTransport> transports) {
+        public PublicKeyCredentialDescriptorBuilder transports(Set<AuthenticatorTransport> transports) {
             return this.transports(Optional.of(transports));
         }
     }

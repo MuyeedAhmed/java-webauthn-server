@@ -31,26 +31,18 @@ import java.util.Optional;
 import lombok.NonNull;
 import lombok.Value;
 
-@Value
 public class AssertionRequestWrapper {
 
-    @NonNull
     private final ByteArray requestId;
 
-    @NonNull
     private final PublicKeyCredentialRequestOptions publicKeyCredentialRequestOptions;
 
-    @NonNull
     private final Optional<String> username;
 
-    @NonNull
-    @JsonIgnore
     private final transient com.yubico.webauthn.AssertionRequest request;
 
     public AssertionRequestWrapper(
-        @NonNull
         ByteArray requestId,
-        @NonNull
             com.yubico.webauthn.AssertionRequest request
     ) {
         this.requestId = requestId;

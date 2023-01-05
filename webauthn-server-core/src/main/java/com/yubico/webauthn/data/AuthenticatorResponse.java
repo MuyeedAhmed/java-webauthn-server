@@ -45,7 +45,6 @@ public interface AuthenticatorResponse {
     /**
      * {@link #getAuthenticatorData()} parsed as a domain object.
      */
-    @JsonIgnore
     default AuthenticatorData getParsedAuthenticatorData() {
         return new AuthenticatorData(getAuthenticatorData());
     }
@@ -62,7 +61,6 @@ public interface AuthenticatorResponse {
     /**
      * {@link #getClientDataJSON()} parsed as a domain object.
      */
-    @JsonIgnore
     CollectedClientData getClientData();
 
 }

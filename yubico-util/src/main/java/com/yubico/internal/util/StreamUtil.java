@@ -32,7 +32,6 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 import lombok.experimental.UtilityClass;
 
-@UtilityClass
 public class StreamUtil {
 
     public static <T> Stream<T> toStream(Iterator<T> it) {

@@ -55,8 +55,6 @@ import lombok.NonNull;
  * Attachment Enumeration (enum AuthenticatorAttachment)
  * </a>
  */
-@JsonSerialize(using = JsonStringSerializer.class)
-@AllArgsConstructor
 public enum AuthenticatorAttachment implements JsonStringSerializable {
 
     /**
@@ -77,15 +75,13 @@ public enum AuthenticatorAttachment implements JsonStringSerializable {
      */
     PLATFORM("platform");
 
-    @NonNull
     private final String id;
 
-    private static Optional<AuthenticatorAttachment> fromString(@NonNull String id) {
+    private static Optional<AuthenticatorAttachment> fromString(String id) {
         return Stream.of(values()).filter(v -> v.id.equals(id)).findAny();
     }
 
-    @JsonCreator
-    private static AuthenticatorAttachment fromJsonString(@NonNull String id) {
+    private static AuthenticatorAttachment fromJsonString(String id) {
         return fromString(id).orElseThrow(() -> new IllegalArgumentException(String.format(
             "Unknown %s value: %s", AuthenticatorAttachment.class.getSimpleName(), id
         )));

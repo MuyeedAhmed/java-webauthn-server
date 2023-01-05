@@ -10,23 +10,15 @@ import lombok.Builder;
 import lombok.NonNull;
 import lombok.Value;
 
-@Value
-@Builder
 public class U2fRegistrationResult {
 
-    @NonNull
     private final PublicKeyCredentialDescriptor keyId;
 
     private final boolean attestationTrusted;
 
-    @NonNull
     private final ByteArray publicKeyCose;
 
-    @NonNull
-    @Builder.Default
     private final List<String> warnings = Collections.emptyList();
 
-    @NonNull
-    @Builder.Default
     private final Optional<Attestation> attestationMetadata = Optional.empty();
 }

@@ -44,8 +44,6 @@ import lombok.NonNull;
  * Enumeration (enum AttestationConveyancePreference)
  * </a>
  */
-@JsonSerialize(using = JsonStringSerializer.class)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum AttestationConveyancePreference implements JsonStringSerializable {
 
     /**
@@ -80,15 +78,13 @@ public enum AttestationConveyancePreference implements JsonStringSerializable {
      */
     DIRECT("direct");
 
-    @NonNull
     private final String id;
 
-    private static Optional<AttestationConveyancePreference> fromString(@NonNull String id) {
+    private static Optional<AttestationConveyancePreference> fromString(String id) {
         return Stream.of(values()).filter(v -> v.id.equals(id)).findAny();
     }
 
-    @JsonCreator
-    private static AttestationConveyancePreference fromJsonString(@NonNull String id) {
+    private static AttestationConveyancePreference fromJsonString(String id) {
         return fromString(id).orElseThrow(() -> new IllegalArgumentException(String.format(
             "Unknown %s value: %s", AttestationConveyancePreference.class.getSimpleName(), id
         )));

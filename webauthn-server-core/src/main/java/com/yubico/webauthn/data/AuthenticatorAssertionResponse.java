@@ -48,22 +48,16 @@ import org.checkerframework.checker.returnsrcvr.qual.This;
  * Authentication Assertion (interface AuthenticatorAssertionResponse)
  * </a>
  */
-@Value
 public class AuthenticatorAssertionResponse implements AuthenticatorResponse {
 
-    @NonNull
-    @Getter(onMethod = @__({ @Override }))
     private final ByteArray authenticatorData;
 
-    @NonNull
-    @Getter(onMethod = @__({ @Override }))
     private final ByteArray clientDataJSON;
 
     /**
      * The raw signature returned from the authenticator. See <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#op-get-assertion">§6.3.3
      * The authenticatorGetAssertion Operation</a>.
      */
-    @NonNull
     private final ByteArray signature;
 
     /**
@@ -71,19 +65,16 @@ public class AuthenticatorAssertionResponse implements AuthenticatorResponse {
      * <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#op-get-assertion">§6.3.3 The authenticatorGetAssertion
      * Operation</a>.
      */
-    @NonNull
     private final Optional<ByteArray> userHandle;
 
-    @NonNull
-    @Getter(onMethod = @__({ @Override }))
     private final transient CollectedClientData clientData;
 
-    @Builder//(toBuilder = true)
+    //(toBuilder = true)
     private AuthenticatorAssertionResponse(
-        @NonNull final ByteArray authenticatorData,
-        @NonNull final ByteArray clientDataJSON,
-        @NonNull final ByteArray signature,
-        @NonNull final Optional<ByteArray> userHandle
+        final ByteArray authenticatorData,
+        final ByteArray clientDataJSON,
+        final ByteArray signature,
+        final Optional<ByteArray> userHandle
     ) throws IOException, Base64UrlException {
         this.authenticatorData = authenticatorData;
         this.clientDataJSON = clientDataJSON;
@@ -92,12 +83,11 @@ public class AuthenticatorAssertionResponse implements AuthenticatorResponse {
         this.clientData = new CollectedClientData(this.clientDataJSON);
     }
 
-    @JsonCreator
     private AuthenticatorAssertionResponse(
-        @NonNull @JsonProperty("authenticatorData") final ByteArray authenticatorData,
-        @NonNull @JsonProperty("clientDataJSON") final ByteArray clientDataJSON,
-        @NonNull @JsonProperty("signature") final ByteArray signature,
-        @JsonProperty("userHandle") final ByteArray userHandle
+        final ByteArray authenticatorData,
+        final ByteArray clientDataJSON,
+        final ByteArray signature,
+        final ByteArray userHandle
     ) throws IOException, Base64UrlException {
         this(
             authenticatorData,
@@ -115,7 +105,7 @@ public class AuthenticatorAssertionResponse implements AuthenticatorResponse {
          * <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#op-get-assertion">§6.3.3 The authenticatorGetAssertion
          * Operation</a>.
          */
-        public @This AuthenticatorAssertionResponseBuilder userHandle(@NonNull Optional<ByteArray> userHandle) {
+        public AuthenticatorAssertionResponseBuilder userHandle(Optional<ByteArray> userHandle) {
             this.userHandle = userHandle;
             return this;
         }
@@ -125,7 +115,7 @@ public class AuthenticatorAssertionResponse implements AuthenticatorResponse {
          * <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#op-get-assertion">§6.3.3 The authenticatorGetAssertion
          * Operation</a>.
          */
-        public @This AuthenticatorAssertionResponseBuilder userHandle(@NonNull ByteArray userHandle) {
+        public AuthenticatorAssertionResponseBuilder userHandle(ByteArray userHandle) {
             return this.userHandle(Optional.of(userHandle));
         }
     }

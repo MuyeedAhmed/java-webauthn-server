@@ -4,8 +4,6 @@ import com.yubico.webauthn.data.ByteArray;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
 
-@Value
-@EqualsAndHashCode(callSuper = true)
 public class InvalidSignatureCountException extends AssertionFailedException {
 
     private final ByteArray credentialId;

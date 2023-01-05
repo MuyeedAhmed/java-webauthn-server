@@ -37,28 +37,21 @@ import org.checkerframework.checker.returnsrcvr.qual.This;
 /**
  * Parameters for {@link RelyingParty#startRegistration(StartRegistrationOptions)}.
  */
-@Value
-@Builder(toBuilder = true)
 public class StartRegistrationOptions {
 
     /**
      * Identifiers for the user creating a credential.
      */
-    @NonNull
     private final UserIdentity user;
 
     /**
      * Constraints on what kind of authenticator the user is allowed to use to create the credential.
      */
-    @NonNull
-    @Builder.Default
     private final Optional<AuthenticatorSelectionCriteria> authenticatorSelection = Optional.empty();
 
     /**
      * Extension inputs for this registration operation.
      */
-    @NonNull
-    @Builder.Default
     private final RegistrationExtensionInputs extensions = RegistrationExtensionInputs.builder().build();
 
     /**
@@ -72,15 +65,13 @@ public class StartRegistrationOptions {
      * The default is empty.
      * </p>
      */
-    @NonNull
-    @Builder.Default
     private final Optional<Long> timeout = Optional.empty();
 
     public static class StartRegistrationOptionsBuilder {
         /**
          * Constraints on what kind of authenticator the user is allowed to use to create the credential.
          */
-        public @This StartRegistrationOptionsBuilder authenticatorSelection(@NonNull Optional<AuthenticatorSelectionCriteria> authenticatorSelection) {
+        public StartRegistrationOptionsBuilder authenticatorSelection(Optional<AuthenticatorSelectionCriteria> authenticatorSelection) {
             this.authenticatorSelection = authenticatorSelection;
             this.authenticatorSelection$set = true;
             return this;
@@ -89,7 +80,7 @@ public class StartRegistrationOptions {
         /**
          * Constraints on what kind of authenticator the user is allowed to use to create the credential.
          */
-        public @This StartRegistrationOptionsBuilder authenticatorSelection(@NonNull AuthenticatorSelectionCriteria authenticatorSelection) {
+        public StartRegistrationOptionsBuilder authenticatorSelection(AuthenticatorSelectionCriteria authenticatorSelection) {
             return this.authenticatorSelection(Optional.of(authenticatorSelection));
         }
 
@@ -104,7 +95,7 @@ public class StartRegistrationOptions {
          * The default is empty.
          * </p>
          */
-        public @This StartRegistrationOptionsBuilder timeout(@NonNull Optional<Long> timeout) {
+        public StartRegistrationOptionsBuilder timeout(Optional<Long> timeout) {
             if (timeout.isPresent() && timeout.get() <= 0) {
                 throw new IllegalArgumentException("timeout must be positive, was: " + timeout.get());
             }
@@ -124,7 +115,7 @@ public class StartRegistrationOptions {
          * The default is empty.
          * </p>
          */
-        public @This StartRegistrationOptionsBuilder timeout(long timeout) {
+        public StartRegistrationOptionsBuilder timeout(long timeout) {
             return this.timeout(Optional.of(timeout));
         }
     }

@@ -66,8 +66,6 @@ import org.checkerframework.checker.returnsrcvr.qual.This;
  * versions (function closures) of these four operations rather than a stateful object.
  * </p>
  */
-@Builder(toBuilder = true)
-@Value
 public class RelyingParty {
 
     private static final SecureRandom random = new SecureRandom();
@@ -86,7 +84,6 @@ public class RelyingParty {
      * @see #startRegistration(StartRegistrationOptions)
      * @see PublicKeyCredentialCreationOptions
      */
-    @NonNull
     private final RelyingPartyIdentity identity;
 
     /**
@@ -103,7 +100,6 @@ public class RelyingParty {
      *
      * @see #getIdentity()
      */
-    @NonNull
     private final Set<String> origins;
 
 
@@ -125,7 +121,6 @@ public class RelyingParty {
      * <li>the stored signature counter when verifying an assertion</li>
      * </ul>
      */
-    @NonNull
     private final CredentialRepository credentialRepository;
 
     /**
@@ -145,7 +140,6 @@ public class RelyingParty {
      * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#sctn-appid-extension">§10.1. FIDO AppID Extension
      * (appid)</a>
      */
-    @NonNull
     private final Optional<AppId> appId;
 
     /**
@@ -164,7 +158,6 @@ public class RelyingParty {
      * @see PublicKeyCredentialCreationOptions#getAttestation()
      * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#sctn-attestation">§6.4. Attestation</a>
      */
-    @NonNull
     private final Optional<AttestationConveyancePreference> attestationConveyancePreference;
 
     /**
@@ -178,7 +171,6 @@ public class RelyingParty {
      * @see PublicKeyCredentialCreationOptions#getAttestation()
      * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#sctn-attestation">§6.4. Attestation</a>
      */
-    @NonNull
     private final Optional<MetadataService> metadataService;
 
     /**
@@ -202,8 +194,6 @@ public class RelyingParty {
      * @see PublicKeyCredentialCreationOptions#getAttestation()
      * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#sctn-attestation">§6.4. Attestation</a>
      */
-    @Builder.Default
-    @NonNull
     private final List<PublicKeyCredentialParameters> preferredPubkeyParams = Collections.unmodifiableList(Arrays.asList(
         PublicKeyCredentialParameters.ES256,
         PublicKeyCredentialParameters.EdDSA,
@@ -221,7 +211,6 @@ public class RelyingParty {
      *
      * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#extensions">§9. WebAuthn Extensions</a>
      */
-    @Builder.Default
     private final boolean allowUnrequestedExtensions = false;
 
     /**
@@ -239,7 +228,6 @@ public class RelyingParty {
      * The default is <code>true</code>.
      * </p>
      */
-    @Builder.Default
     private final boolean allowUntrustedAttestation = true;
 
     /**
@@ -251,16 +239,15 @@ public class RelyingParty {
      * The default is <code>true</code>.
      * </p>
      */
-    @Builder.Default
     private final boolean validateSignatureCounter = true;
 
     private RelyingParty(
-        @NonNull RelyingPartyIdentity identity,
+        RelyingPartyIdentity identity,
         Set<String> origins,
-        @NonNull CredentialRepository credentialRepository,
-        @NonNull Optional<AppId> appId,
-        @NonNull Optional<AttestationConveyancePreference> attestationConveyancePreference,
-        @NonNull Optional<MetadataService> metadataService, List<PublicKeyCredentialParameters> preferredPubkeyParams,
+        CredentialRepository credentialRepository,
+        Optional<AppId> appId,
+        Optional<AttestationConveyancePreference> attestationConveyancePreference,
+        Optional<MetadataService> metadataService, List<PublicKeyCredentialParameters> preferredPubkeyParams,
         boolean allowUnrequestedExtensions,
         boolean allowUntrustedAttestation,
         boolean validateSignatureCounter
@@ -405,9 +392,9 @@ public class RelyingParty {
     }
 
     public static class RelyingPartyBuilder {
-        private @NonNull Optional<AppId> appId = Optional.empty();
-        private @NonNull Optional<AttestationConveyancePreference> attestationConveyancePreference = Optional.empty();
-        private @NonNull Optional<MetadataService> metadataService = Optional.empty();
+        private Optional<AppId> appId = Optional.empty();
+        private Optional<AttestationConveyancePreference> attestationConveyancePreference = Optional.empty();
+        private Optional<MetadataService> metadataService = Optional.empty();
 
         /**
          * The extension input to set for the <code>appid</code> extension when initiating authentication operations.
@@ -426,7 +413,7 @@ public class RelyingParty {
          * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#sctn-appid-extension">§10.1. FIDO AppID Extension
          * (appid)</a>
          */
-        public @This RelyingPartyBuilder appId(@NonNull Optional<AppId> appId) {
+        public RelyingPartyBuilder appId(Optional<AppId> appId) {
             this.appId = appId;
             return this;
         }
@@ -448,7 +435,7 @@ public class RelyingParty {
          * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#sctn-appid-extension">§10.1. FIDO AppID Extension
          * (appid)</a>
          */
-        public @This RelyingPartyBuilder appId(@NonNull AppId appId) {
+        public RelyingPartyBuilder appId(AppId appId) {
             return this.appId(Optional.of(appId));
         }
 
@@ -468,7 +455,7 @@ public class RelyingParty {
          * @see PublicKeyCredentialCreationOptions#getAttestation()
          * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#sctn-attestation">§6.4. Attestation</a>
          */
-        public @This RelyingPartyBuilder attestationConveyancePreference(@NonNull Optional<AttestationConveyancePreference> attestationConveyancePreference) {
+        public RelyingPartyBuilder attestationConveyancePreference(Optional<AttestationConveyancePreference> attestationConveyancePreference) {
             this.attestationConveyancePreference = attestationConveyancePreference;
             return this;
         }
@@ -489,7 +476,7 @@ public class RelyingParty {
          * @see PublicKeyCredentialCreationOptions#getAttestation()
          * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#sctn-attestation">§6.4. Attestation</a>
          */
-        public @This RelyingPartyBuilder attestationConveyancePreference(@NonNull AttestationConveyancePreference attestationConveyancePreference) {
+        public RelyingPartyBuilder attestationConveyancePreference(AttestationConveyancePreference attestationConveyancePreference) {
             return this.attestationConveyancePreference(Optional.of(attestationConveyancePreference));
         }
 
@@ -504,7 +491,7 @@ public class RelyingParty {
          * @see PublicKeyCredentialCreationOptions#getAttestation()
          * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#sctn-attestation">§6.4. Attestation</a>
          */
-        public @This RelyingPartyBuilder metadataService(@NonNull Optional<MetadataService> metadataService) {
+        public RelyingPartyBuilder metadataService(Optional<MetadataService> metadataService) {
             this.metadataService = metadataService;
             return this;
         }
@@ -520,7 +507,7 @@ public class RelyingParty {
          * @see PublicKeyCredentialCreationOptions#getAttestation()
          * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#sctn-attestation">§6.4. Attestation</a>
          */
-        public @This RelyingPartyBuilder metadataService(@NonNull MetadataService metadataService) {
+        public RelyingPartyBuilder metadataService(MetadataService metadataService) {
             return this.metadataService(Optional.of(metadataService));
         }
     }

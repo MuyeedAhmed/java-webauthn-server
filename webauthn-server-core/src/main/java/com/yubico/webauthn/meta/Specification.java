@@ -37,9 +37,6 @@ import lombok.Value;
 /**
  * Reference to a particular version of a specification document.
  */
-@Value
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder
 public class Specification {
 
     /**
@@ -60,7 +57,6 @@ public class Specification {
     /**
      * The release date of the specification document.
      */
-    @JsonSerialize(using = LocalDateJsonSerializer.class)
     private final LocalDate releaseDate;
 
     static SpecificationBuilder builder() {

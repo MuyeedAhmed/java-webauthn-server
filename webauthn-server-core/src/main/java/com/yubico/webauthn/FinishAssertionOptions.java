@@ -37,14 +37,11 @@ import org.checkerframework.checker.returnsrcvr.qual.This;
 /**
  * Parameters for {@link RelyingParty#finishAssertion(FinishAssertionOptions)}.
  */
-@Value
-@Builder(toBuilder = true)
 public class FinishAssertionOptions {
 
     /**
      * The request that the {@link #getResponse() response} is a response to.
      */
-    @NonNull
     private final AssertionRequest request;
 
     /**
@@ -52,7 +49,6 @@ public class FinishAssertionOptions {
      *
      * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#getAssertion">navigator.credentials.get()</a>
      */
-    @NonNull
     private final PublicKeyCredential<AuthenticatorAssertionResponse, ClientAssertionExtensionOutputs> response;
 
     /**
@@ -61,8 +57,6 @@ public class FinishAssertionOptions {
      *
      * @see <a href="https://tools.ietf.org/html/rfc8471">The Token Binding Protocol Version 1.0</a>
      */
-    @NonNull
-    @Builder.Default
     private final Optional<ByteArray> callerTokenBindingId = Optional.empty();
 
     public static class FinishAssertionOptionsBuilder {
@@ -72,7 +66,7 @@ public class FinishAssertionOptions {
          *
          * @see <a href="https://tools.ietf.org/html/rfc8471">The Token Binding Protocol Version 1.0</a>
          */
-        public @This FinishAssertionOptionsBuilder callerTokenBindingId(@NonNull Optional<ByteArray> callerTokenBindingId) {
+        public FinishAssertionOptionsBuilder callerTokenBindingId(Optional<ByteArray> callerTokenBindingId) {
             this.callerTokenBindingId = callerTokenBindingId;
             this.callerTokenBindingId$set = true;
             return this;
@@ -84,7 +78,7 @@ public class FinishAssertionOptions {
          *
          * @see <a href="https://tools.ietf.org/html/rfc8471">The Token Binding Protocol Version 1.0</a>
          */
-        public @This FinishAssertionOptionsBuilder callerTokenBindingId(@NonNull ByteArray callerTokenBindingId) {
+        public FinishAssertionOptionsBuilder callerTokenBindingId(ByteArray callerTokenBindingId) {
             return this.callerTokenBindingId(Optional.of(callerTokenBindingId));
         }
     }

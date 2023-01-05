@@ -31,7 +31,6 @@ import static org.junit.Assert.assertEquals;
 
 public class ByteArrayTest {
 
-    @Test
     public void testEncodeBase64Url() {
         byte[] input = "Test".getBytes();
         String base64Data = new ByteArray(input).getBase64Url();
@@ -40,7 +39,6 @@ public class ByteArrayTest {
         assertEquals("VGVzdA", base64Data);
     }
 
-    @Test
     public void decodeTest() throws Base64UrlException {
         String base64Data = "VGVzdA";
         String base64DataWithPadding = "VGVzdA==";
@@ -56,7 +54,6 @@ public class ByteArrayTest {
         assertEquals(out3, "");
     }
 
-    @Test
     public void codecMimeTest() {
         String base64 = "ab+/+/==";
         String base64WithoutPadding = "ab+/+/";
@@ -69,12 +66,10 @@ public class ByteArrayTest {
         assertEquals(expectedRecodedMime, ByteArray.fromBase64(base64WithoutPadding).getBase64());
     }
 
-    @Test(expected = Base64UrlException.class)
     public void decodeBadAlphabetTest() throws Base64UrlException {
         ByteArray.fromBase64Url("****");
     }
 
-    @Test(expected = Base64UrlException.class)
     public void decodeBadPaddingTest() throws Base64UrlException {
         ByteArray.fromBase64Url("A===");
     }

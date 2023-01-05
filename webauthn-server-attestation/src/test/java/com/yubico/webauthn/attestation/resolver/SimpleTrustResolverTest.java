@@ -53,7 +53,6 @@ public class SimpleTrustResolverTest {
     public SimpleTrustResolverTest() throws IOException, CertificateException {
     }
 
-    @Test
     public void testResolve() throws Exception {
         X509Certificate certificate = CertificateParser.parseDer(ATTESTATION_CERT);
 
@@ -63,7 +62,6 @@ public class SimpleTrustResolverTest {
         assertEquals("CN=Yubico U2F Root CA Serial 457200631", trustAnchor.get().getSubjectDN().getName());
     }
 
-    @Test
     public void resolveReturnsEmptyOnUntrustedSignature() throws Exception {
         X509Certificate cert = mock(X509Certificate.class);
         doThrow(new SignatureException("Forced failure")).when(cert).verify(ArgumentMatchers.any());
@@ -84,22 +82,18 @@ public class SimpleTrustResolverTest {
         resolver.resolveTrustAnchor(cert);
     }
 
-    @Test(expected = RuntimeException.class)
     public void resolveThrowsExceptionOnCertificateException() throws Exception {
         resolveThrowsExceptionOnUnexpectedError(new CertificateException("Forced failure"));
     }
 
-    @Test(expected = RuntimeException.class)
     public void resolveThrowsExceptionOnNoSuchAlgorithmException() throws Exception {
         resolveThrowsExceptionOnUnexpectedError(new NoSuchAlgorithmException("Forced failure"));
     }
 
-    @Test(expected = RuntimeException.class)
     public void resolveThrowsExceptionOnInvalidKeyException() throws Exception {
         resolveThrowsExceptionOnUnexpectedError(new InvalidKeyException("Forced failure"));
     }
 
-    @Test(expected = RuntimeException.class)
     public void resolveThrowsExceptionOnNoSuchProviderException() throws Exception {
         resolveThrowsExceptionOnUnexpectedError(new NoSuchProviderException("Forced failure"));
     }

@@ -40,9 +40,6 @@ import org.bouncycastle.util.Arrays;
 /**
  * An immutable byte array with support for encoding/decoding to/from various encodings.
  */
-@JsonSerialize(using = JsonStringSerializer.class)
-@EqualsAndHashCode
-@ToString(includeFieldNames = false, onlyExplicitlyIncluded = true)
 public final class ByteArray implements Comparable<ByteArray>, JsonStringSerializable {
 
     private final static Base64.Encoder BASE64_ENCODER = Base64.getEncoder();
@@ -51,21 +48,18 @@ public final class ByteArray implements Comparable<ByteArray>, JsonStringSeriali
     private final static Base64.Encoder BASE64URL_ENCODER = Base64.getUrlEncoder().withoutPadding();
     private final static Base64.Decoder BASE64URL_DECODER = Base64.getUrlDecoder();
 
-    @NonNull
     private final byte[] bytes;
 
-    @NonNull
     private final String base64;
 
     /**
      * Create a new instance by copying the contents of <code>bytes</code>.
      */
-    public ByteArray(@NonNull byte[] bytes) {
+    public ByteArray(byte[] bytes) {
         this.bytes = BinaryUtil.copy(bytes);
         this.base64 = BASE64URL_ENCODER.encodeToString(this.bytes);
     }
 
-    @JsonCreator
     private ByteArray(String base64) throws Base64UrlException {
         try {
             this.bytes = BASE64URL_DECODER.decode(base64);
@@ -78,7 +72,7 @@ public final class ByteArray implements Comparable<ByteArray>, JsonStringSeriali
     /**
      * Create a new instance by decoding <code>base64</code> as classic Base64 data.
      */
-    public static ByteArray fromBase64(@NonNull final String base64) {
+    public static ByteArray fromBase64(final String base64) {
         return new ByteArray(BASE64_DECODER.decode(base64));
     }
 
@@ -87,7 +81,7 @@ public final class ByteArray implements Comparable<ByteArray>, JsonStringSeriali
      *
      * @throws Base64UrlException if <code>base64</code> is not valid Base64Url data.
      */
-    public static ByteArray fromBase64Url(@NonNull final String base64) throws Base64UrlException {
+    public static ByteArray fromBase64Url(final String base64) throws Base64UrlException {
         return new ByteArray(base64);
     }
 
@@ -96,7 +90,7 @@ public final class ByteArray implements Comparable<ByteArray>, JsonStringSeriali
      *
      * @throws HexException if <code>hex</code> is not valid hexadecimal data.
      */
-    public static ByteArray fromHex(@NonNull final String hex) throws HexException {
+    public static ByteArray fromHex(final String hex) throws HexException {
         try {
             return new ByteArray(BinaryUtil.fromHex(hex));
         } catch (Exception e) {
@@ -107,7 +101,7 @@ public final class ByteArray implements Comparable<ByteArray>, JsonStringSeriali
     /**
      * @return a new instance containing a copy of this instance followed by a copy of <code>tail</code>.
      */
-    public ByteArray concat(@NonNull ByteArray tail) {
+    public ByteArray concat(ByteArray tail) {
         return new ByteArray(Arrays.concatenate(this.bytes, tail.bytes));
     }
 
@@ -143,7 +137,6 @@ public final class ByteArray implements Comparable<ByteArray>, JsonStringSeriali
     /**
      * @return the content bytes encoded as hexadecimal data.
      */
-    @ToString.Include
     public String getHex() {
         return BinaryUtil.toHex(bytes);
     }

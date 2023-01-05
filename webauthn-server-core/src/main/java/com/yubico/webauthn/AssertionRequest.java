@@ -39,16 +39,12 @@ import org.checkerframework.checker.returnsrcvr.qual.This;
 /**
  * A combination of a {@link PublicKeyCredentialRequestOptions} and, optionally, a {@link #getUsername() username}.
  */
-@Value
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder(toBuilder = true)
 public class AssertionRequest {
 
     /**
      * An object that can be serialized to JSON and passed as the <code>publicKey</code> argument to
      * <code>navigator.credentials.get()</code>.
      */
-    @NonNull
     private final PublicKeyCredentialRequestOptions publicKeyCredentialRequestOptions;
 
     /**
@@ -59,13 +55,11 @@ public class AssertionRequest {
      * credential</a>, and identification of the user has been deferred until the response is received.
      * </p>
      */
-    @NonNull
     private final Optional<String> username;
 
-    @JsonCreator
     private AssertionRequest(
-        @NonNull @JsonProperty("publicKeyCredentialRequestOptions") PublicKeyCredentialRequestOptions publicKeyCredentialRequestOptions,
-        @JsonProperty("username") String username
+        PublicKeyCredentialRequestOptions publicKeyCredentialRequestOptions,
+        String username
     ) {
         this(publicKeyCredentialRequestOptions, Optional.ofNullable(username));
     }
@@ -81,7 +75,7 @@ public class AssertionRequest {
          * credential</a>, and identification of the user has been deferred until the response is received.
          * </p>
          */
-        public @This AssertionRequestBuilder username(@NonNull Optional<String> username) {
+        public AssertionRequestBuilder username(Optional<String> username) {
             this.username = username;
             return this;
         }
@@ -94,7 +88,7 @@ public class AssertionRequest {
          * credential</a>, and identification of the user has been deferred until the response is received.
          * </p>
          */
-        public @This AssertionRequestBuilder username(@NonNull String username) {
+        public AssertionRequestBuilder username(String username) {
             return this.username(Optional.of(username));
         }
     }

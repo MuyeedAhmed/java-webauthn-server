@@ -47,20 +47,16 @@ import lombok.NonNull;
  * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#enumdef-publickeycredentialtype">§5.10.2. Credential Type Enumeration
  * (enum PublicKeyCredentialType)</a>
  */
-@JsonSerialize(using = JsonStringSerializer.class)
-@AllArgsConstructor
 public enum PublicKeyCredentialType implements JsonStringSerializable {
     PUBLIC_KEY("public-key");
 
-    @NonNull
     private final String id;
 
-    private static Optional<PublicKeyCredentialType> fromString(@NonNull String id) {
+    private static Optional<PublicKeyCredentialType> fromString(String id) {
         return Stream.of(values()).filter(v -> v.id.equals(id)).findAny();
     }
 
-    @JsonCreator
-    private static PublicKeyCredentialType fromJsonString(@NonNull String id) {
+    private static PublicKeyCredentialType fromJsonString(String id) {
         return fromString(id).orElseThrow(() -> new IllegalArgumentException(String.format(
             "Unknown %s value: %s", PublicKeyCredentialType.class.getSimpleName(), id
         )));

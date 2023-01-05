@@ -48,8 +48,6 @@ import org.checkerframework.checker.returnsrcvr.qual.This;
  *
  * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#extensions">§9. WebAuthn Extensions</a>
  */
-@Value
-@Builder(toBuilder = true)
 public class AssertionExtensionInputs implements ExtensionInputs {
 
     /**
@@ -76,12 +74,10 @@ public class AssertionExtensionInputs implements ExtensionInputs {
      * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#sctn-appid-extension">§10.1. FIDO AppID Extension
      * (appid)</a>
      */
-    @NonNull
     private final Optional<AppId> appid;
 
-    @JsonCreator
     private AssertionExtensionInputs(
-        @NonNull @JsonProperty("appid") Optional<AppId> appid
+        Optional<AppId> appid
     ) {
         this.appid = appid;
     }
@@ -122,7 +118,7 @@ public class AssertionExtensionInputs implements ExtensionInputs {
          * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#sctn-appid-extension">§10.1. FIDO AppID Extension
          * (appid)</a>
          */
-        public @This AssertionExtensionInputsBuilder appid(@NonNull Optional<AppId> appid) {
+        public AssertionExtensionInputsBuilder appid(Optional<AppId> appid) {
             this.appid = appid;
             return this;
         }
@@ -151,7 +147,7 @@ public class AssertionExtensionInputs implements ExtensionInputs {
          * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#sctn-appid-extension">§10.1. FIDO AppID Extension
          * (appid)</a>
          */
-        public @This AssertionExtensionInputsBuilder appid(@NonNull AppId appid) {
+        public AssertionExtensionInputsBuilder appid(AppId appid) {
             return this.appid(Optional.of(appid));
         }
     }

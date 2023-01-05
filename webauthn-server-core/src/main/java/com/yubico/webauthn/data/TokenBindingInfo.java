@@ -38,22 +38,19 @@ import static com.yubico.internal.util.ExceptionUtil.assure;
  *
  * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#dictdef-tokenbinding">dictionary TokenBinding</a>
  */
-@Value
 public class TokenBindingInfo {
 
-    @NonNull
     private final TokenBindingStatus status;
 
     /**
      * This member MUST be present if {@link #status} is present, and MUST be a base64url encoding of the Token Binding
      * ID that was used when communicating with the Relying Party.
      */
-    @NonNull
     private final Optional<ByteArray> id;
 
     TokenBindingInfo(
-        @NonNull TokenBindingStatus status,
-        @NonNull Optional<ByteArray> id
+        TokenBindingStatus status,
+        Optional<ByteArray> id
     ) {
         if (status == TokenBindingStatus.PRESENT) {
             assure(
@@ -73,15 +70,14 @@ public class TokenBindingInfo {
         this.id = id;
     }
 
-    @JsonCreator
     private TokenBindingInfo(
-        @NonNull @JsonProperty("status") TokenBindingStatus status,
-        @JsonProperty("id") ByteArray id
+        TokenBindingStatus status,
+        ByteArray id
     ) {
         this(status, Optional.ofNullable(id));
     }
 
-    public static TokenBindingInfo present(@NonNull ByteArray id) {
+    public static TokenBindingInfo present(ByteArray id) {
         return new TokenBindingInfo(TokenBindingStatus.PRESENT, Optional.of(id));
     }
 

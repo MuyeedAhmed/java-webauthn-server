@@ -64,8 +64,6 @@ import lombok.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Path("/v1")
-@Produces(MediaType.APPLICATION_JSON)
 public class WebAuthnRestResource {
     private static final Logger logger = LoggerFactory.getLogger(WebAuthnRestResource.class);
 
@@ -81,7 +79,6 @@ public class WebAuthnRestResource {
         this.server = server;
     }
 
-    @Context
     private UriInfo uriInfo;
 
     private final class IndexResponse {
@@ -115,7 +112,6 @@ public class WebAuthnRestResource {
 
     }
 
-    @GET
     public Response index() throws IOException {
         return Response.ok(writeJson(new IndexResponse())).build();
     }
@@ -123,8 +119,6 @@ public class WebAuthnRestResource {
     private static final class VersionResponse {
         public final VersionInfo version = VersionInfo.getInstance();
     }
-    @GET
-    @Path("version")
     public Response version() throws JsonProcessingException {
         return Response.ok(writeJson(new VersionResponse())).build();
     }
@@ -145,13 +139,11 @@ public class WebAuthnRestResource {
         }
     }
 
-    @Path("register")
-    @POST
     public Response startRegistration(
-        @NonNull @FormParam("username") String username,
-        @NonNull @FormParam("displayName") String displayName,
-        @FormParam("credentialNickname") String credentialNickname,
-        @FormParam("requireResidentKey") @DefaultValue("false") boolean requireResidentKey
+        String username,
+        String displayName,
+        String credentialNickname,
+        boolean requireResidentKey
     ) throws MalformedURLException {
         logger.trace("startRegistration username: {}, displayName: {}, credentialNickname: {}, requireResidentKey: {}", username, displayName, credentialNickname, requireResidentKey);
         Either<String, RegistrationRequest> result = server.startRegistration(
@@ -171,9 +163,7 @@ public class WebAuthnRestResource {
         }
     }
 
-    @Path("register/finish")
-    @POST
-    public Response finishRegistration(@NonNull String responseJson) {
+    public Response finishRegistration(String responseJson) {
         logger.trace("finishRegistration responseJson: {}", responseJson);
         Either<List<String>, WebAuthnServer.SuccessfulRegistrationResult> result = server.finishRegistration(responseJson);
         return finishResponse(
@@ -184,9 +174,7 @@ public class WebAuthnRestResource {
         );
     }
 
-    @Path("register/finish-u2f")
-    @POST
-    public Response finishU2fRegistration(@NonNull String responseJson) {
+    public Response finishU2fRegistration(String responseJson) {
         logger.trace("finishRegistration responseJson: {}", responseJson);
         Either<List<String>, WebAuthnServer.SuccessfulU2fRegistrationResult> result = server.finishU2fRegistration(responseJson);
         return finishResponse(
@@ -210,10 +198,8 @@ public class WebAuthnRestResource {
         private StartAuthenticationActions() throws MalformedURLException {
         }
     }
-    @Path("authenticate")
-    @POST
     public Response startAuthentication(
-        @FormParam("username") String username
+        String username
     ) throws MalformedURLException {
         logger.trace("startAuthentication username: {}", username);
         Either<List<String>, AssertionRequestWrapper> request = server.startAuthentication(Optional.ofNullable(username));
@@ -224,9 +210,7 @@ public class WebAuthnRestResource {
         }
     }
 
-    @Path("authenticate/finish")
-    @POST
-    public Response finishAuthentication(@NonNull String responseJson) {
+    public Response finishAuthentication(String responseJson) {
         logger.trace("finishAuthentication responseJson: {}", responseJson);
 
         Either<List<String>, WebAuthnServer.SuccessfulAuthenticationResult> result = server.finishAuthentication(responseJson);
@@ -239,11 +223,9 @@ public class WebAuthnRestResource {
         );
     }
 
-    @Path("action/{action}/finish")
-    @POST
     public Response finishAuthenticatedAction(
-        @NonNull @PathParam("action") String action,
-        @NonNull String responseJson
+        String action,
+        String responseJson
     ) {
         logger.trace("finishAuthenticatedAction: {}, responseJson: {}", action, responseJson);
         Either<List<String>, ?> mappedResult = server.finishAuthenticatedAction(responseJson);
@@ -271,12 +253,10 @@ public class WebAuthnRestResource {
         }
     }
 
-    @Path("action/add-credential")
-    @POST
     public Response addCredential(
-        @NonNull @FormParam("username") String username,
-        @FormParam("credentialNickname") String credentialNickname,
-        @FormParam("requireResidentKey") @DefaultValue("false") boolean requireResidentKey
+        String username,
+        String credentialNickname,
+        boolean requireResidentKey
     ) throws MalformedURLException {
         logger.trace("addCredential username: {}, credentialNickname: {}, requireResidentKey: {}", username, credentialNickname, requireResidentKey);
 
@@ -299,23 +279,17 @@ public class WebAuthnRestResource {
         }
     }
 
-    @Path("action/add-credential/finish/finish")
-    @POST
-    public Response finishAddCredential(@NonNull String responseJson) {
+    public Response finishAddCredential(String responseJson) {
         return finishRegistration(responseJson);
     }
 
-    @Path("action/add-credential/finish/finish-u2f")
-    @POST
-    public Response finishU2fAddCredential(@NonNull String responseJson) {
+    public Response finishU2fAddCredential(String responseJson) {
         return finishU2fRegistration(responseJson);
     }
 
-    @Path("action/deregister")
-    @POST
     public Response deregisterCredential(
-        @NonNull @FormParam("username") String username,
-        @NonNull @FormParam("credentialId") String credentialIdBase64
+        String username,
+        String credentialIdBase64
     ) throws MalformedURLException {
         logger.trace("deregisterCredential username: {}, credentialId: {}", username, credentialIdBase64);
 
@@ -351,10 +325,8 @@ public class WebAuthnRestResource {
         }
     }
 
-    @Path("delete-account")
-    @DELETE
     public Response deleteAccount(
-        @NonNull @FormParam("username") String username
+        String username
     ) {
         logger.trace("deleteAccount username: {}", username);
 

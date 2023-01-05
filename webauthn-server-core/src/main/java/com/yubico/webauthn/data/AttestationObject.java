@@ -52,8 +52,6 @@ import lombok.Value;
  *
  * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#sctn-attestation">§6.4. Attestation</a>
  */
-@Value
-@JsonSerialize(using = AttestationObject.JsonSerializer.class)
 public class AttestationObject {
 
     /**
@@ -61,14 +59,12 @@ public class AttestationObject {
      *
      * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#sctn-attestation">§6.4. Attestation</a>
      */
-    @NonNull
     private final ByteArray bytes;
 
     /**
      * The authenticator data embedded inside this attestation object. This is one part of the signed data that the
      * signature in the attestation statement (if any) is computed over.
      */
-    @NonNull
     private final transient AuthenticatorData authenticatorData;
 
     /**
@@ -81,7 +77,6 @@ public class AttestationObject {
      * Users of this library should not need to access this value directly.
      * </p>
      */
-    @NonNull
     private final transient String format;
 
     /**
@@ -94,7 +89,6 @@ public class AttestationObject {
      * Users of this library should not need to access this value directly.
      * </p>
      */
-    @NonNull
     private final transient ObjectNode attestationStatement;
 
     /**
@@ -102,8 +96,7 @@ public class AttestationObject {
      *
      * @throws IOException if <code>bytes</code> cannot be parsed as a CBOR map.
      */
-    @JsonCreator
-    public AttestationObject(@NonNull ByteArray bytes) throws IOException {
+    public AttestationObject(ByteArray bytes) throws IOException {
         this.bytes = bytes;
 
         final JsonNode decoded = JacksonCodecs.cbor().readTree(bytes.getBytes());

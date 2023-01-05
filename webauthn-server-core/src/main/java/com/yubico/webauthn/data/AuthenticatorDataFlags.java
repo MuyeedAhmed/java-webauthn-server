@@ -34,8 +34,6 @@ import lombok.ToString;
  *
  * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#flags">Table 1</a>
  */
-@ToString
-@EqualsAndHashCode
 public final class AuthenticatorDataFlags {
     public final byte value;
 
@@ -68,8 +66,7 @@ public final class AuthenticatorDataFlags {
     /**
      * Decode an {@link AuthenticatorDataFlags} object from a raw bit field byte.
      */
-    @JsonCreator
-    public AuthenticatorDataFlags(@JsonProperty("value") byte value) {
+    public AuthenticatorDataFlags(byte value) {
         this.value = value;
 
         UP = (value & Bitmasks.UP) != 0;

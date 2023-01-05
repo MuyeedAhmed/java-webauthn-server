@@ -30,7 +30,6 @@ import com.yubico.webauthn.data.ByteArray;
 import lombok.NonNull;
 import lombok.Value;
 
-@Value
 public class U2fCredentialResponse {
 
     private final ByteArray keyHandle;
@@ -38,12 +37,11 @@ public class U2fCredentialResponse {
     private final ByteArray attestationCertAndSignature;
     private final ByteArray clientDataJSON;
 
-    @JsonCreator
     public U2fCredentialResponse(
-        @NonNull @JsonProperty("keyHandle") ByteArray keyHandle,
-        @NonNull@JsonProperty("publicKey") ByteArray publicKey,
-        @NonNull@JsonProperty("attestationCertAndSignature") ByteArray attestationCertAndSignature,
-        @NonNull@JsonProperty("clientDataJSON") ByteArray clientDataJSON
+        ByteArray keyHandle,
+        ByteArray publicKey,
+        ByteArray attestationCertAndSignature,
+        ByteArray clientDataJSON
     ) {
         this.keyHandle = keyHandle;
         this.publicKey = publicKey;

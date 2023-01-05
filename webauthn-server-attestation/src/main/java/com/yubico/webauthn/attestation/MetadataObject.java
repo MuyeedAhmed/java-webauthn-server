@@ -46,9 +46,6 @@ import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
-@JsonIgnoreProperties(ignoreUnknown = true)
-@EqualsAndHashCode(of = { "data" }, callSuper = false)
 public final class MetadataObject {
     private static final ObjectMapper OBJECT_MAPPER = JacksonCodecs.json();
 
@@ -67,7 +64,6 @@ public final class MetadataObject {
     private final List<String> trustedCertificates;
     private final List<JsonNode> devices;
 
-    @JsonCreator
     public MetadataObject(JsonNode data) {
         this.data = data;
         try {
@@ -109,7 +105,6 @@ public final class MetadataObject {
         return trustedCertificates;
     }
 
-    @JsonIgnore
     public List<X509Certificate> getParsedTrustedCertificates() throws CertificateException {
         List<X509Certificate> list = new ArrayList<>();
         for (String trustedCertificate : trustedCertificates) {

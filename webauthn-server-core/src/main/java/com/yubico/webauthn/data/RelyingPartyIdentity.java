@@ -44,9 +44,6 @@ import org.checkerframework.checker.returnsrcvr.qual.This;
  * Party Parameters for Credential Generation (dictionary PublicKeyCredentialRpEntity)
  * </a>
  */
-@Value
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder(toBuilder = true)
 public class RelyingPartyIdentity implements PublicKeyCredentialEntity {
 
     /**
@@ -56,8 +53,6 @@ public class RelyingPartyIdentity implements PublicKeyCredentialEntity {
      * For example: "ACME Corporation", "Wonderful Widgets, Inc." or "ОАО Примертех".
      * </p>
      */
-    @NonNull
-    @Getter(onMethod = @__({ @Override }))
     private final String name;
 
     /**
@@ -66,7 +61,6 @@ public class RelyingPartyIdentity implements PublicKeyCredentialEntity {
      *
      * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#rp-id">RP ID</a>
      */
-    @NonNull
     private final String id;
 
     /**
@@ -79,16 +73,12 @@ public class RelyingPartyIdentity implements PublicKeyCredentialEntity {
      * needing more storage.
      * </p>
      */
-    @NonNull
-    @Getter(onMethod = @__({ @Override }))
-    @Builder.Default
     private final Optional<URL> icon = Optional.empty();
 
-    @JsonCreator
     private RelyingPartyIdentity(
-        @NonNull @JsonProperty("name") String name,
-        @NonNull @JsonProperty("id") String id,
-        @JsonProperty("icon") URL icon
+        String name,
+        String id,
+        URL icon
     ) {
         this(name, id, Optional.ofNullable(icon));
     }
@@ -104,7 +94,7 @@ public class RelyingPartyIdentity implements PublicKeyCredentialEntity {
          * needing more storage.
          * </p>
          */
-        public @This RelyingPartyIdentityBuilder icon(@NonNull Optional<URL> icon) {
+        public RelyingPartyIdentityBuilder icon(Optional<URL> icon) {
             this.icon = icon;
             this.icon$set = true;
             return this;
@@ -120,7 +110,7 @@ public class RelyingPartyIdentity implements PublicKeyCredentialEntity {
          * needing more storage.
          * </p>
          */
-        public @This RelyingPartyIdentityBuilder icon(@NonNull URL icon) {
+        public RelyingPartyIdentityBuilder icon(URL icon) {
             return this.icon(Optional.of(icon));
         }
     }

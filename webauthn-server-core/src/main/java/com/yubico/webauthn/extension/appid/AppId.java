@@ -40,8 +40,6 @@ import lombok.Value;
  *
  * @see <a href="https://fidoalliance.org/specs/fido-v2.0-id-20180227/fido-appid-and-facets-v2.0-id-20180227.html">FIDO AppID and Facet Specification</a>
  */
-@Value
-@JsonSerialize(using = AppId.JsonSerializer.class)
 public class AppId {
 
     /**
@@ -55,7 +53,6 @@ public class AppId {
      * @throws InvalidAppIdException if <code>appId</code> is not a valid FIDO AppID.
      * @see <a href="https://fidoalliance.org/specs/fido-v2.0-id-20180227/fido-appid-and-facets-v2.0-id-20180227.html">FIDO AppID and Facet Specification</a>
      */
-    @JsonCreator
     public AppId(String appId) throws InvalidAppIdException {
         checkIsValid(appId);
         this.id = appId;

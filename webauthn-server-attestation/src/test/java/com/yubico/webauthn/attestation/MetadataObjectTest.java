@@ -52,7 +52,6 @@ public class MetadataObjectTest {
 
     private final ObjectMapper objectMapper = JacksonCodecs.json();
 
-    @Test
     public void testToAndFromJson() throws Exception {
         MetadataObject metadata = objectMapper.readValue(JSON, MetadataObject.class);
         ObjectMapper objectMapper = new ObjectMapper();

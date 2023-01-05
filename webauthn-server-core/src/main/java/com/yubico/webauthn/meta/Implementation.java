@@ -34,8 +34,6 @@ import lombok.Value;
 /**
  * Description of this version of this library
  */
-@Value
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class Implementation {
 
     /**

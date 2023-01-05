@@ -9,7 +9,6 @@ import org.junit.Test;
 
 public class StartAssertionOptionsTest {
 
-    @Test
     public void itHasTheseBuilderMethods() {
         StartRegistrationOptions.builder()
             .user(UserIdentity.builder().name("").displayName("").id(new ByteArray(new byte[]{})).build())

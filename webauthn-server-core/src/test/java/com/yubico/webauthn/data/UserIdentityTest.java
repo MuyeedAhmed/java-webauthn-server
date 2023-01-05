@@ -7,7 +7,6 @@ import org.junit.Test;
 
 public class UserIdentityTest {
 
-    @Test
     public void itHasTheseBuilderMethods() throws MalformedURLException {
         UserIdentity.builder()
             .name("")

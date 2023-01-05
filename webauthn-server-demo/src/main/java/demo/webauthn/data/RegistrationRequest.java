@@ -30,8 +30,6 @@ import java.util.Optional;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
 
-@Value
-@EqualsAndHashCode(callSuper = false)
 public class RegistrationRequest {
 
     String username;

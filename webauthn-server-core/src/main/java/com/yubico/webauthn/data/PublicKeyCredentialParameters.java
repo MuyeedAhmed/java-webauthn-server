@@ -38,27 +38,22 @@ import org.checkerframework.checker.returnsrcvr.qual.This;
  * Parameters for Credential Generation (dictionary PublicKeyCredentialParameters)
  * </a>
  */
-@Value
-@Builder(toBuilder = true)
 public class PublicKeyCredentialParameters {
 
     /**
      * Specifies the cryptographic signature algorithm with which the newly generated credential will be used, and thus
      * also the type of asymmetric key pair to be generated, e.g., RSA or Elliptic Curve.
      */
-    @NonNull
     private final COSEAlgorithmIdentifier alg;
 
     /**
      * Specifies the type of credential to be created.
      */
-    @NonNull
-    @Builder.Default
     private final PublicKeyCredentialType type = PublicKeyCredentialType.PUBLIC_KEY;
 
     private PublicKeyCredentialParameters(
-        @NonNull @JsonProperty("alg") COSEAlgorithmIdentifier alg,
-        @NonNull @JsonProperty("type") PublicKeyCredentialType type
+        COSEAlgorithmIdentifier alg,
+        PublicKeyCredentialType type
     ) {
         this.alg = alg;
         this.type = type;

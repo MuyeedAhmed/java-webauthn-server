@@ -42,9 +42,6 @@ import org.checkerframework.checker.returnsrcvr.qual.This;
  * Authenticator Selection Criteria (dictionary AuthenticatorSelectionCriteria)
  * </a>
  */
-@Value
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder(toBuilder = true)
 public class AuthenticatorSelectionCriteria {
 
     /**
@@ -52,8 +49,6 @@ public class AuthenticatorSelectionCriteria {
      * href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#attachment">§5.4.5 Authenticator Attachment Enumeration
      * (enum AuthenticatorAttachment)</a>.
      */
-    @NonNull
-    @Builder.Default
     private final Optional<AuthenticatorAttachment> authenticatorAttachment = Optional.empty();
 
     /**
@@ -61,7 +56,6 @@ public class AuthenticatorSelectionCriteria {
      * authenticator MUST create a <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#client-side-resident-public-key-credential-source">client-side-resident
      * public key credential source</a> when creating a public key credential.
      */
-    @Builder.Default
     private final boolean requireResidentKey = false;
 
     /**
@@ -70,15 +64,12 @@ public class AuthenticatorSelectionCriteria {
      * <code>navigator.credentials.create()</code> operation. Eligible authenticators are filtered to only those
      * capable of satisfying this requirement.
      */
-    @NonNull
-    @Builder.Default
     private UserVerificationRequirement userVerification = UserVerificationRequirement.PREFERRED;
 
-    @JsonCreator
     private AuthenticatorSelectionCriteria(
-        @JsonProperty("authenticatorAttachment") AuthenticatorAttachment authenticatorAttachment,
-        @JsonProperty("requireResidentKey") boolean requireResidentKey,
-        @NonNull @JsonProperty("userVerification") UserVerificationRequirement userVerification
+        AuthenticatorAttachment authenticatorAttachment,
+        boolean requireResidentKey,
+        UserVerificationRequirement userVerification
     ) {
         this(Optional.ofNullable(authenticatorAttachment), requireResidentKey, userVerification);
     }
@@ -89,7 +80,7 @@ public class AuthenticatorSelectionCriteria {
          * href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#attachment">§5.4.5 Authenticator Attachment Enumeration
          * (enum AuthenticatorAttachment)</a>.
          */
-        public @This AuthenticatorSelectionCriteriaBuilder authenticatorAttachment(@NonNull Optional<AuthenticatorAttachment> authenticatorAttachment) {
+        public AuthenticatorSelectionCriteriaBuilder authenticatorAttachment(Optional<AuthenticatorAttachment> authenticatorAttachment) {
             this.authenticatorAttachment = authenticatorAttachment;
             this.authenticatorAttachment$set = true;
             return this;
@@ -100,7 +91,7 @@ public class AuthenticatorSelectionCriteria {
          * href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#attachment">§5.4.5 Authenticator Attachment Enumeration
          * (enum AuthenticatorAttachment)</a>.
          */
-        public @This AuthenticatorSelectionCriteriaBuilder authenticatorAttachment(@NonNull AuthenticatorAttachment authenticatorAttachment) {
+        public AuthenticatorSelectionCriteriaBuilder authenticatorAttachment(AuthenticatorAttachment authenticatorAttachment) {
             return this.authenticatorAttachment(Optional.of(authenticatorAttachment));
         }
     }

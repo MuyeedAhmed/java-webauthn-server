@@ -69,9 +69,9 @@ public final class SimpleAttestationResolver implements AttestationResolver {
     private final Map<String, DeviceMatcher> matchers;
 
     public SimpleAttestationResolver(
-        @NonNull Collection<MetadataObject> objects,
-        @NonNull TrustResolver trustResolver,
-        @NonNull Map<String, DeviceMatcher> matchers
+        Collection<MetadataObject> objects,
+        TrustResolver trustResolver,
+        Map<String, DeviceMatcher> matchers
     ) throws CertificateException {
         for (MetadataObject object : objects) {
             for (String caPem : object.getTrustedCertificates()) {
@@ -134,7 +134,7 @@ public final class SimpleAttestationResolver implements AttestationResolver {
 
     private boolean deviceMatches(
         JsonNode selectors,
-        @NonNull X509Certificate attestationCertificate
+        X509Certificate attestationCertificate
     ) {
         if (selectors == null || selectors.isNull()) {
             return true;

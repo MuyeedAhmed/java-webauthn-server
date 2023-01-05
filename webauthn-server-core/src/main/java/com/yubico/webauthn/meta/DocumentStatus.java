@@ -32,8 +32,6 @@ import lombok.AllArgsConstructor;
 /**
  * A representation of Web Authentication specification document statuses.
  */
-@JsonSerialize(using = JsonStringSerializer.class)
-@AllArgsConstructor
 public enum DocumentStatus implements JsonStringSerializable {
     /**
      * An editor's draft is a changing work in progress.

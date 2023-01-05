@@ -43,8 +43,6 @@ import lombok.Value;
 /**
  * The result of a call to {@link RelyingParty#finishRegistration(FinishRegistrationOptions)}.
  */
-@Value
-@Builder(toBuilder = true)
 public class RegistrationResult {
 
     /**
@@ -54,7 +52,6 @@ public class RegistrationResult {
      * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#credential-id">Credential ID</a>
      * @see PublicKeyCredential#getId()
      */
-    @NonNull
     private final PublicKeyCredentialDescriptor keyId;
 
     /**
@@ -78,7 +75,6 @@ public class RegistrationResult {
      * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#sctn-attestation-types">§6.4.3. Attestation
      * Types</a>
      */
-    @NonNull
     private final AttestationType attestationType;
 
     /**
@@ -91,14 +87,11 @@ public class RegistrationResult {
      *
      * @see RegisteredCredential#getPublicKeyCose()
      */
-    @NonNull
     private final ByteArray publicKeyCose;
 
     /**
      * Zero or more human-readable messages about non-critical issues.
      */
-    @NonNull
-    @Builder.Default
     private final List<String> warnings = Collections.emptyList();
 
     /**
@@ -112,18 +105,15 @@ public class RegistrationResult {
      * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#sctn-attestation">§6.4. Attestation</a>
      * @see com.yubico.webauthn.RelyingParty.RelyingPartyBuilder#metadataService(Optional)
      */
-    @NonNull
-    @Builder.Default
     private final Optional<Attestation> attestationMetadata = Optional.empty();
 
-    @JsonCreator
     private RegistrationResult(
-        @NonNull @JsonProperty("keyId") PublicKeyCredentialDescriptor keyId,
-        @JsonProperty("attestationTrusted") boolean attestationTrusted,
-        @NonNull @JsonProperty("attestationType") AttestationType attestationType,
-        @NonNull @JsonProperty("publicKeyCose") ByteArray publicKeyCose,
-        @NonNull @JsonProperty("warnings") List<String> warnings,
-        @NonNull @JsonProperty("attestationMetadata") Optional<Attestation> attestationMetadata
+        PublicKeyCredentialDescriptor keyId,
+        boolean attestationTrusted,
+        AttestationType attestationType,
+        ByteArray publicKeyCose,
+        List<String> warnings,
+        Optional<Attestation> attestationMetadata
     ) {
         this.keyId = keyId;
         this.attestationTrusted = attestationTrusted;

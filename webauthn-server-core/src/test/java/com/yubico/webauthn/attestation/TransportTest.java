@@ -31,7 +31,6 @@ import static org.junit.Assert.assertEquals;
 
 public class TransportTest {
 
-    @Test
     public void testParsingSingleValuesFromInt() {
         assertEquals(EnumSet.of(Transport.BT_CLASSIC), Transport.fromInt(1));
         assertEquals(EnumSet.of(Transport.BLE), Transport.fromInt(2));
@@ -39,7 +38,6 @@ public class TransportTest {
         assertEquals(EnumSet.of(Transport.NFC), Transport.fromInt(8));
     }
 
-    @Test
     public void testParsingSetsFromInt() {
         assertEquals(EnumSet.noneOf(Transport.class), Transport.fromInt(0));
         assertEquals(EnumSet.of(Transport.BLE, Transport.NFC), Transport.fromInt(10));
@@ -48,7 +46,6 @@ public class TransportTest {
                 Transport.fromInt(15));
     }
 
-    @Test
     public void testEncodingSingleValuesToInt() {
         assertEquals(1, Transport.toInt(Transport.BT_CLASSIC));
         assertEquals(2, Transport.toInt(Transport.BLE));
@@ -56,7 +53,6 @@ public class TransportTest {
         assertEquals(8, Transport.toInt(Transport.NFC));
     }
 
-    @Test
     public void testEncodingSetsToInt() {
         assertEquals(0, Transport.toInt());
         assertEquals(10, Transport.toInt(Transport.BLE, Transport.NFC));

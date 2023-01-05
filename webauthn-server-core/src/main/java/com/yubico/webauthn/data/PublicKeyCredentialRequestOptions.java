@@ -45,8 +45,6 @@ import org.checkerframework.checker.returnsrcvr.qual.This;
  * Options for Assertion Generation (dictionary PublicKeyCredentialRequestOptions)
  * </a>
  */
-@Value
-@Builder(toBuilder = true)
 public class PublicKeyCredentialRequestOptions {
 
     /**
@@ -54,7 +52,6 @@ public class PublicKeyCredentialRequestOptions {
      * assertion. See the <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#cryptographic-challenges">§13.1
      * Cryptographic Challenges</a> security consideration.
      */
-    @NonNull
     private final ByteArray challenge;
 
     /**
@@ -63,7 +60,6 @@ public class PublicKeyCredentialRequestOptions {
      * This is treated as a hint, and MAY be overridden by the client.
      * </p>
      */
-    @NonNull
     private final Optional<Long> timeout;
 
     /**
@@ -72,7 +68,6 @@ public class PublicKeyCredentialRequestOptions {
      * If omitted, its value will be set by the client.
      * </p>
      */
-    @NonNull
     private final Optional<String> rpId;
 
     /**
@@ -80,7 +75,6 @@ public class PublicKeyCredentialRequestOptions {
      * caller, in descending order of the caller’s preference (the first item in the list is the most preferred
      * credential, and so on down the list).
      */
-    @NonNull
     private final Optional<List<PublicKeyCredentialDescriptor>> allowCredentials;
 
     /**
@@ -90,8 +84,6 @@ public class PublicKeyCredentialRequestOptions {
      * Eligible authenticators are filtered to only those capable of satisfying this requirement.
      * </p>
      */
-    @NonNull
-    @Builder.Default
     private final UserVerificationRequirement userVerification = UserVerificationRequirement.PREFERRED;
 
     /**
@@ -101,17 +93,15 @@ public class PublicKeyCredentialRequestOptions {
      * extension.
      * </p>
      */
-    @NonNull
-    @Builder.Default
     private final AssertionExtensionInputs extensions = AssertionExtensionInputs.builder().build();
 
     private PublicKeyCredentialRequestOptions(
-        @NonNull ByteArray challenge,
-        @NonNull Optional<Long> timeout,
-        @NonNull Optional<String> rpId,
-        @NonNull Optional<List<PublicKeyCredentialDescriptor>> allowCredentials,
-        @NonNull UserVerificationRequirement userVerification,
-        @NonNull AssertionExtensionInputs extensions
+        ByteArray challenge,
+        Optional<Long> timeout,
+        Optional<String> rpId,
+        Optional<List<PublicKeyCredentialDescriptor>> allowCredentials,
+        UserVerificationRequirement userVerification,
+        AssertionExtensionInputs extensions
     ) {
         this.challenge = challenge;
         this.timeout = timeout;
@@ -121,14 +111,13 @@ public class PublicKeyCredentialRequestOptions {
         this.extensions = extensions;
     }
 
-    @JsonCreator
     private PublicKeyCredentialRequestOptions(
-        @NonNull @JsonProperty("challenge") ByteArray challenge,
-        @JsonProperty("timeout") Long timeout,
-        @JsonProperty("rpId") String rpId,
-        @JsonProperty("allowCredentials") List<PublicKeyCredentialDescriptor> allowCredentials,
-        @NonNull @JsonProperty("userVerification") UserVerificationRequirement userVerification,
-        @JsonProperty("extensions") AssertionExtensionInputs extensions
+        ByteArray challenge,
+        Long timeout,
+        String rpId,
+        List<PublicKeyCredentialDescriptor> allowCredentials,
+        UserVerificationRequirement userVerification,
+        AssertionExtensionInputs extensions
     ) {
         this(
             challenge,
@@ -141,9 +130,9 @@ public class PublicKeyCredentialRequestOptions {
     }
 
     public static class PublicKeyCredentialRequestOptionsBuilder {
-        private @NonNull Optional<Long> timeout = Optional.empty();
-        private @NonNull Optional<String> rpId = Optional.empty();
-        private @NonNull Optional<List<PublicKeyCredentialDescriptor>> allowCredentials = Optional.empty();
+        private Optional<Long> timeout = Optional.empty();
+        private Optional<String> rpId = Optional.empty();
+        private Optional<List<PublicKeyCredentialDescriptor>> allowCredentials = Optional.empty();
 
         /**
          * Specifies a time, in milliseconds, that the caller is willing to wait for the call to complete.
@@ -151,7 +140,7 @@ public class PublicKeyCredentialRequestOptions {
          * This is treated as a hint, and MAY be overridden by the client.
          * </p>
          */
-        public @This PublicKeyCredentialRequestOptionsBuilder timeout(@NonNull Optional<Long> timeout) {
+        public PublicKeyCredentialRequestOptionsBuilder timeout(Optional<Long> timeout) {
             this.timeout = timeout;
             return this;
         }
@@ -162,7 +151,7 @@ public class PublicKeyCredentialRequestOptions {
          * This is treated as a hint, and MAY be overridden by the client.
          * </p>
          */
-        public @This PublicKeyCredentialRequestOptionsBuilder timeout(long timeout) {
+        public PublicKeyCredentialRequestOptionsBuilder timeout(long timeout) {
             return this.timeout(Optional.of(timeout));
         }
 
@@ -172,7 +161,7 @@ public class PublicKeyCredentialRequestOptions {
          * If omitted, its value will be set by the client.
          * </p>
          */
-        public @This PublicKeyCredentialRequestOptionsBuilder rpId(@NonNull Optional<String> rpId) {
+        public PublicKeyCredentialRequestOptionsBuilder rpId(Optional<String> rpId) {
             this.rpId = rpId;
             return this;
         }
@@ -183,7 +172,7 @@ public class PublicKeyCredentialRequestOptions {
          * If omitted, its value will be set by the client.
          * </p>
          */
-        public @This PublicKeyCredentialRequestOptionsBuilder rpId(@NonNull String rpId) {
+        public PublicKeyCredentialRequestOptionsBuilder rpId(String rpId) {
             return this.rpId(Optional.of(rpId));
         }
 
@@ -192,7 +181,7 @@ public class PublicKeyCredentialRequestOptions {
          * caller, in descending order of the caller’s preference (the first item in the list is the most preferred
          * credential, and so on down the list).
          */
-        public @This PublicKeyCredentialRequestOptionsBuilder allowCredentials(@NonNull Optional<List<PublicKeyCredentialDescriptor>> allowCredentials) {
+        public PublicKeyCredentialRequestOptionsBuilder allowCredentials(Optional<List<PublicKeyCredentialDescriptor>> allowCredentials) {
             this.allowCredentials = allowCredentials;
             return this;
         }
@@ -202,7 +191,7 @@ public class PublicKeyCredentialRequestOptions {
          * caller, in descending order of the caller’s preference (the first item in the list is the most preferred
          * credential, and so on down the list).
          */
-        public @This PublicKeyCredentialRequestOptionsBuilder allowCredentials(@NonNull List<PublicKeyCredentialDescriptor> allowCredentials) {
+        public PublicKeyCredentialRequestOptionsBuilder allowCredentials(List<PublicKeyCredentialDescriptor> allowCredentials) {
             return this.allowCredentials(Optional.of(allowCredentials));
         }
     }

@@ -35,7 +35,6 @@ import java.util.stream.Collectors;
 import lombok.experimental.UtilityClass;
 
 
-@UtilityClass
 class ExtensionsValidation {
 
     static boolean validate(ExtensionInputs requested, PublicKeyCredential<? extends AuthenticatorResponse, ? extends ClientExtensionOutputs> response) {

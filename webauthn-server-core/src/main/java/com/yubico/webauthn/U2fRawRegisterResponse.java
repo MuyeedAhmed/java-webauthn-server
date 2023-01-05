@@ -38,7 +38,6 @@ import lombok.Value;
 /**
  * The register response produced by the token/key
  */
-@Value
 class U2fRawRegisterResponse {
     private static final byte REGISTRATION_SIGNED_RESERVED_BYTE_VALUE = (byte) 0x00;
     private static final BouncyCastleCrypto crypto = new BouncyCastleCrypto();

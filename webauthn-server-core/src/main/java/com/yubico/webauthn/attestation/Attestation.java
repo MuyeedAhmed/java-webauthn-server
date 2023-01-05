@@ -38,8 +38,6 @@ import lombok.Value;
 /**
  * Non-standardized representation of partly free-form information about an authenticator device.
  */
-@Value
-@Builder(toBuilder = true)
 public class Attestation implements Serializable {
 
     /**
@@ -51,38 +49,29 @@ public class Attestation implements Serializable {
     /**
      * A unique identifier for a particular version of the data source of the data in this object.
      */
-    @NonNull
-    @Builder.Default
     private final Optional<String> metadataIdentifier = Optional.empty();
 
     /**
      * Free-form information about the authenticator vendor.
      */
-    @NonNull
-    @Builder.Default
     private final Optional<Map<String, String>> vendorProperties = Optional.empty();
 
     /**
      * Free-form information about the authenticator model.
      */
-    @NonNull
-    @Builder.Default
     private final Optional<Map<String, String>> deviceProperties = Optional.empty();
 
     /**
      * The set of communication modes supported by the authenticator.
      */
-    @NonNull
-    @Builder.Default
     private final Optional<Set<Transport>> transports = Optional.empty();
 
-    @JsonCreator
     private Attestation(
-        @JsonProperty("trusted") boolean trusted,
-        @NonNull @JsonProperty("metadataIdentifier") Optional<String> metadataIdentifier,
-        @NonNull @JsonProperty("vendorProperties") Optional<Map<String, String>> vendorProperties,
-        @NonNull @JsonProperty("deviceProperties") Optional<Map<String, String>> deviceProperties,
-        @NonNull @JsonProperty("transports") Optional<Set<Transport>> transports
+        boolean trusted,
+        Optional<String> metadataIdentifier,
+        Optional<Map<String, String>> vendorProperties,
+        Optional<Map<String, String>> deviceProperties,
+        Optional<Set<Transport>> transports
     ) {
         this.trusted = trusted;
         this.metadataIdentifier = metadataIdentifier;

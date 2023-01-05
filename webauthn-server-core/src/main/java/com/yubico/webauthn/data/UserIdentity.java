@@ -44,9 +44,6 @@ import org.checkerframework.checker.returnsrcvr.qual.This;
  * Account Parameters for Credential Generation (dictionary PublicKeyCredentialUserEntity)
  * </a>
  */
-@Value
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder(toBuilder = true)
 public class UserIdentity implements PublicKeyCredentialEntity {
 
     /**
@@ -56,8 +53,6 @@ public class UserIdentity implements PublicKeyCredentialEntity {
      * For example: "alexm", "alex.p.mueller@example.com" or "+14255551234".
      * </p>
      */
-    @NonNull
-    @Getter(onMethod = @__({ @Override }))
     private final String name;
 
     /**
@@ -86,7 +81,6 @@ public class UserIdentity implements PublicKeyCredentialEntity {
      * @see <a href="https://tools.ietf.org/html/rfc8264">RFC 8264</a>
      * @see <a href="https://tools.ietf.org/html/rfc8266">RFC 8266</a>
      */
-    @NonNull
     private final String displayName;
 
     /**
@@ -111,7 +105,6 @@ public class UserIdentity implements PublicKeyCredentialEntity {
      * handle.
      * </p>
      */
-    @NonNull
     private final ByteArray id;
 
     /**
@@ -123,17 +116,13 @@ public class UserIdentity implements PublicKeyCredentialEntity {
      * needing more storage.
      * </p>
      */
-    @NonNull
-    @Getter(onMethod = @__({ @Override }))
-    @Builder.Default
     private final Optional<URL> icon = Optional.empty();
 
-    @JsonCreator
     private UserIdentity(
-        @NonNull @JsonProperty("name") String name,
-        @NonNull @JsonProperty("displayName") String displayName,
-        @NonNull @JsonProperty("id") ByteArray id,
-        @JsonProperty("icon") URL icon
+        String name,
+        String displayName,
+        ByteArray id,
+        URL icon
     ) {
         this(name, displayName, id, Optional.ofNullable(icon));
     }
@@ -148,7 +137,7 @@ public class UserIdentity implements PublicKeyCredentialEntity {
          * needing more storage.
          * </p>
          */
-        public @This UserIdentityBuilder icon(@NonNull Optional<URL> icon) {
+        public UserIdentityBuilder icon(Optional<URL> icon) {
             this.icon = icon;
             this.icon$set = true;
             return this;
@@ -163,7 +152,7 @@ public class UserIdentity implements PublicKeyCredentialEntity {
          * needing more storage.
          * </p>
          */
-        public @This UserIdentityBuilder icon(@NonNull URL icon) {
+        public UserIdentityBuilder icon(URL icon) {
             return this.icon(Optional.of(icon));
         }
     }

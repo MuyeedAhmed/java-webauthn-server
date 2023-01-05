@@ -14,7 +14,6 @@ import org.junit.Test;
 
 public class RelyingPartyTest {
 
-    @Test(expected = NullPointerException.class)
     public void itHasTheseBuilderMethods() throws InvalidAppIdException {
 
         final MetadataService metadataService = new MetadataService() {

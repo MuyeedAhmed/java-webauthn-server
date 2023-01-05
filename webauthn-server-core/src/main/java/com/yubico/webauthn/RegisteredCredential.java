@@ -45,9 +45,6 @@ import lombok.Value;
  * You may at your discretion store them directly in your database, or assemble them from other components.
  * </p>
  */
-@Value
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder(toBuilder = true)
 public class RegisteredCredential {
 
     /**
@@ -58,7 +55,6 @@ public class RegisteredCredential {
      * @see RegistrationResult#getKeyId()
      * @see PublicKeyCredentialDescriptor#getId()
      */
-    @NonNull
     private final ByteArray credentialId;
 
     /**
@@ -68,7 +64,6 @@ public class RegisteredCredential {
      * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#user-handle">User Handle</a>
      * @see UserIdentity#getId()
      */
-    @NonNull
     private final ByteArray userHandle;
 
     /**
@@ -83,7 +78,6 @@ public class RegisteredCredential {
      * @see AttestedCredentialData#getCredentialPublicKey()
      * @see RegistrationResult#getPublicKeyCose()
      */
-    @NonNull
     private final ByteArray publicKeyCose;
 
     /**
@@ -100,6 +94,5 @@ public class RegisteredCredential {
      * @see AuthenticatorData#getSignatureCounter()
      * @see AssertionResult#getSignatureCount()
      */
-    @Builder.Default
     private final long signatureCount = 0;
 }

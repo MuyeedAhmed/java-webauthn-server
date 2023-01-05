@@ -41,8 +41,6 @@ import lombok.NonNull;
  * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#enumdef-userverificationrequirement">§5.10.6. User
  * Verification Requirement Enumeration (enum UserVerificationRequirement)</a>
  */
-@JsonSerialize(using = JsonStringSerializer.class)
-@AllArgsConstructor
 public enum UserVerificationRequirement implements JsonStringSerializable {
 
     /**
@@ -63,15 +61,13 @@ public enum UserVerificationRequirement implements JsonStringSerializable {
      */
     REQUIRED("required");
 
-    @NonNull
     private final String id;
 
-    private static Optional<UserVerificationRequirement> fromString(@NonNull String id) {
+    private static Optional<UserVerificationRequirement> fromString(String id) {
         return Stream.of(values()).filter(v -> v.id.equals(id)).findAny();
     }
 
-    @JsonCreator
-    private static UserVerificationRequirement fromJsonString(@NonNull String id) {
+    private static UserVerificationRequirement fromJsonString(String id) {
         return fromString(id).orElseThrow(() -> new IllegalArgumentException(String.format(
             "Unknown %s value: %s", UserVerificationRequirement.class.getSimpleName(), id
         )));

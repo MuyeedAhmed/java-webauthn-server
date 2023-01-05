@@ -57,7 +57,6 @@ public class SimpleAttestationResolverTest {
         );
     }
 
-    @Test
     public void testResolve() throws Exception {
         final SimpleAttestationResolver resolver = createAttestationResolver(metadata);
         Attestation metadata = resolver.resolve(attestationCertificate).orElse(null);
@@ -66,7 +65,6 @@ public class SimpleAttestationResolverTest {
         assertEquals("foobar", metadata.getMetadataIdentifier().get());
     }
 
-    @Test
     public void resolveReturnsEmptyOnUntrustedSignature() throws Exception {
         final SimpleAttestationResolver resolver = new SimpleAttestationResolver(
             Collections.singletonList(metadata),

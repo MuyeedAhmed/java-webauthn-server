@@ -40,8 +40,6 @@ import lombok.NonNull;
  * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#enumdef-tokenbindingstatus">enum TokenBindingStatus</a>
  * @see TokenBindingInfo
  */
-@AllArgsConstructor
-@JsonSerialize(using = JsonStringSerializer.class)
 public enum TokenBindingStatus implements JsonStringSerializable {
 
     /**
@@ -56,17 +54,15 @@ public enum TokenBindingStatus implements JsonStringSerializable {
      */
     SUPPORTED("supported");
 
-    @NonNull
     private final String id;
 
-    private static Optional<TokenBindingStatus> fromString(@NonNull String value) {
+    private static Optional<TokenBindingStatus> fromString(String value) {
         return Arrays.stream(values())
             .filter(v -> v.id.equals(value))
             .findAny();
     }
 
-    @JsonCreator
-    public static TokenBindingStatus fromJsonString(@NonNull String id) {
+    public static TokenBindingStatus fromJsonString(String id) {
         return fromString(id).orElseThrow(() -> new IllegalArgumentException(String.format(
             "Unknown %s value: %s", TokenBindingStatus.class.getSimpleName(), id
         )));

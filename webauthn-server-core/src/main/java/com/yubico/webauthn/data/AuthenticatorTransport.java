@@ -51,8 +51,6 @@ import lombok.NonNull;
  * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#enumdef-authenticatortransport">§5.10.4. Authenticator
  * Transport Enumeration (enum AuthenticatorTransport)</a>
  */
-@JsonSerialize(using = JsonStringSerializer.class)
-@AllArgsConstructor
 public enum AuthenticatorTransport implements JsonStringSerializable {
 
     /**
@@ -77,15 +75,13 @@ public enum AuthenticatorTransport implements JsonStringSerializable {
     INTERNAL("internal")
     ;
 
-    @NonNull
     private final String id;
 
-    private static Optional<AuthenticatorTransport> fromString(@NonNull String id) {
+    private static Optional<AuthenticatorTransport> fromString(String id) {
         return Stream.of(values()).filter(v -> v.id.equals(id)).findAny();
     }
 
-    @JsonCreator
-    private static AuthenticatorTransport fromJsonString(@NonNull String id) {
+    private static AuthenticatorTransport fromJsonString(String id) {
         return fromString(id).orElseThrow(() -> new IllegalArgumentException(String.format(
             "Unknown %s value: %s", AuthenticatorTransport.class.getSimpleName(), id
         )));

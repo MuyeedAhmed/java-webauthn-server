@@ -31,7 +31,6 @@ import com.yubico.webauthn.data.ClientAssertionExtensionOutputs;
 import com.yubico.webauthn.data.PublicKeyCredential;
 import lombok.Value;
 
-@Value
 public class AssertionResponse {
 
     private final ByteArray requestId;
@@ -39,8 +38,8 @@ public class AssertionResponse {
     private final PublicKeyCredential<AuthenticatorAssertionResponse, ClientAssertionExtensionOutputs> credential;
 
     public AssertionResponse(
-        @JsonProperty("requestId") ByteArray requestId,
-        @JsonProperty("credential") PublicKeyCredential<AuthenticatorAssertionResponse, ClientAssertionExtensionOutputs> credential
+        ByteArray requestId,
+        PublicKeyCredential<AuthenticatorAssertionResponse, ClientAssertionExtensionOutputs> credential
     ) {
         this.requestId = requestId;
         this.credential = credential;

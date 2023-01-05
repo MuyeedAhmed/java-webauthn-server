@@ -44,8 +44,6 @@ import org.checkerframework.checker.returnsrcvr.qual.This;
  * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#dictdef-publickeycredentialcreationoptions">§5.4.
  * Options for Credential Creation (dictionary PublicKeyCredentialCreationOptions)</a>
  */
-@Value
-@Builder(toBuilder = true)
 public class PublicKeyCredentialCreationOptions {
 
     /**
@@ -56,13 +54,11 @@ public class PublicKeyCredentialCreationOptions {
      * RelyingPartyIdentity} for further details.
      * </p>
      */
-    @NonNull
     private final RelyingPartyIdentity rp;
 
     /**
      * Contains data about the user account for which the Relying Party is requesting attestation.
      */
-    @NonNull
     private final UserIdentity user;
 
     /**
@@ -70,7 +66,6 @@ public class PublicKeyCredentialCreationOptions {
      * href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#cryptographic-challenges">§13.1 Cryptographic
      * Challenges</a> security consideration.
      */
-    @NonNull
     private final ByteArray challenge;
 
     /**
@@ -80,14 +75,12 @@ public class PublicKeyCredentialCreationOptions {
      * preferred credential that it can.
      * </p>
      */
-    @NonNull
     private final List<PublicKeyCredentialParameters> pubKeyCredParams;
 
     /**
      * A time, in milliseconds, that the caller is willing to wait for the call to complete. This is treated as a hint,
      * and MAY be overridden by the client.
      */
-    @NonNull
     private final Optional<Long> timeout;
 
     /**
@@ -95,22 +88,18 @@ public class PublicKeyCredentialCreationOptions {
      * on a single authenticator. The client is requested to return an error if the new credential would be created on
      * an authenticator that also contains one of the credentials enumerated in this parameter.
      */
-    @NonNull
     private final Optional<Set<PublicKeyCredentialDescriptor>> excludeCredentials;
 
     /**
      * Intended for use by Relying Parties that wish to select the appropriate authenticators to participate in the
      * create() operation.
      */
-    @NonNull
     private final Optional<AuthenticatorSelectionCriteria> authenticatorSelection;
 
     /**
      * Intended for use by Relying Parties that wish to express their preference for attestation conveyance. The default
      * is {@link AttestationConveyancePreference#NONE}.
      */
-    @NonNull
-    @Builder.Default
     private final AttestationConveyancePreference attestation = AttestationConveyancePreference.NONE;
 
     /**
@@ -124,20 +113,18 @@ public class PublicKeyCredentialCreationOptions {
      * up-to-date list of registered WebAuthn Extensions.
      * </p>
      */
-    @NonNull
-    @Builder.Default
     private final RegistrationExtensionInputs extensions = RegistrationExtensionInputs.builder().build();
 
     private PublicKeyCredentialCreationOptions(
-        @NonNull RelyingPartyIdentity rp,
-        @NonNull UserIdentity user,
-        @NonNull ByteArray challenge,
-        @NonNull List<PublicKeyCredentialParameters> pubKeyCredParams,
-        @NonNull Optional<Long> timeout,
-        @NonNull Optional<Set<PublicKeyCredentialDescriptor>> excludeCredentials,
-        @NonNull Optional<AuthenticatorSelectionCriteria> authenticatorSelection,
-        @NonNull AttestationConveyancePreference attestation,
-        @NonNull RegistrationExtensionInputs extensions
+        RelyingPartyIdentity rp,
+        UserIdentity user,
+        ByteArray challenge,
+        List<PublicKeyCredentialParameters> pubKeyCredParams,
+        Optional<Long> timeout,
+        Optional<Set<PublicKeyCredentialDescriptor>> excludeCredentials,
+        Optional<AuthenticatorSelectionCriteria> authenticatorSelection,
+        AttestationConveyancePreference attestation,
+        RegistrationExtensionInputs extensions
     ) {
         this.rp = rp;
         this.user = user;
@@ -150,17 +137,16 @@ public class PublicKeyCredentialCreationOptions {
         this.extensions = extensions;
     }
 
-    @JsonCreator
     private PublicKeyCredentialCreationOptions(
-        @NonNull @JsonProperty("rp") RelyingPartyIdentity rp,
-        @NonNull @JsonProperty("user") UserIdentity user,
-        @NonNull @JsonProperty("challenge") ByteArray challenge,
-        @NonNull @JsonProperty("pubKeyCredParams") List<PublicKeyCredentialParameters> pubKeyCredParams,
-        @JsonProperty("timeout") Long timeout,
-        @JsonProperty("excludeCredentials") Set<PublicKeyCredentialDescriptor> excludeCredentials,
-        @JsonProperty("authenticatorSelection") AuthenticatorSelectionCriteria authenticatorSelection,
-        @NonNull @JsonProperty("attestation") AttestationConveyancePreference attestation,
-        @JsonProperty("extensions") RegistrationExtensionInputs extensions
+        RelyingPartyIdentity rp,
+        UserIdentity user,
+        ByteArray challenge,
+        List<PublicKeyCredentialParameters> pubKeyCredParams,
+        Long timeout,
+        Set<PublicKeyCredentialDescriptor> excludeCredentials,
+        AuthenticatorSelectionCriteria authenticatorSelection,
+        AttestationConveyancePreference attestation,
+        RegistrationExtensionInputs extensions
     ) {
         this(
             rp,
@@ -176,15 +162,15 @@ public class PublicKeyCredentialCreationOptions {
     }
 
     public static class PublicKeyCredentialCreationOptionsBuilder {
-        private @NonNull Optional<Long> timeout = Optional.empty();
-        private @NonNull Optional<Set<PublicKeyCredentialDescriptor>> excludeCredentials = Optional.empty();
-        private @NonNull Optional<AuthenticatorSelectionCriteria> authenticatorSelection = Optional.empty();
+        private Optional<Long> timeout = Optional.empty();
+        private Optional<Set<PublicKeyCredentialDescriptor>> excludeCredentials = Optional.empty();
+        private Optional<AuthenticatorSelectionCriteria> authenticatorSelection = Optional.empty();
 
         /**
          * A time, in milliseconds, that the caller is willing to wait for the call to complete. This is treated as a hint,
          * and MAY be overridden by the client.
          */
-        public @This PublicKeyCredentialCreationOptionsBuilder timeout(@NonNull Optional<Long> timeout) {
+        public PublicKeyCredentialCreationOptionsBuilder timeout(Optional<Long> timeout) {
             this.timeout = timeout;
             return this;
         }
@@ -193,7 +179,7 @@ public class PublicKeyCredentialCreationOptions {
          * A time, in milliseconds, that the caller is willing to wait for the call to complete. This is treated as a hint,
          * and MAY be overridden by the client.
          */
-        public @This PublicKeyCredentialCreationOptionsBuilder timeout(long timeout) {
+        public PublicKeyCredentialCreationOptionsBuilder timeout(long timeout) {
             return this.timeout(Optional.of(timeout));
         }
 
@@ -202,7 +188,7 @@ public class PublicKeyCredentialCreationOptions {
          * on a single authenticator. The client is requested to return an error if the new credential would be created on
          * an authenticator that also contains one of the credentials enumerated in this parameter.
          */
-        public @This PublicKeyCredentialCreationOptionsBuilder excludeCredentials(@NonNull Optional<Set<PublicKeyCredentialDescriptor>> excludeCredentials) {
+        public PublicKeyCredentialCreationOptionsBuilder excludeCredentials(Optional<Set<PublicKeyCredentialDescriptor>> excludeCredentials) {
             this.excludeCredentials = excludeCredentials;
             return this;
         }
@@ -212,7 +198,7 @@ public class PublicKeyCredentialCreationOptions {
          * on a single authenticator. The client is requested to return an error if the new credential would be created on
          * an authenticator that also contains one of the credentials enumerated in this parameter.
          */
-        public @This PublicKeyCredentialCreationOptionsBuilder excludeCredentials(@NonNull Set<PublicKeyCredentialDescriptor> excludeCredentials) {
+        public PublicKeyCredentialCreationOptionsBuilder excludeCredentials(Set<PublicKeyCredentialDescriptor> excludeCredentials) {
             return this.excludeCredentials(Optional.of(excludeCredentials));
         }
 
@@ -220,7 +206,7 @@ public class PublicKeyCredentialCreationOptions {
          * Intended for use by Relying Parties that wish to select the appropriate authenticators to participate in the
          * create() operation.
          */
-        public @This PublicKeyCredentialCreationOptionsBuilder authenticatorSelection(@NonNull Optional<AuthenticatorSelectionCriteria> authenticatorSelection) {
+        public PublicKeyCredentialCreationOptionsBuilder authenticatorSelection(Optional<AuthenticatorSelectionCriteria> authenticatorSelection) {
             this.authenticatorSelection = authenticatorSelection;
             return this;
         }
@@ -229,7 +215,7 @@ public class PublicKeyCredentialCreationOptions {
          * Intended for use by Relying Parties that wish to select the appropriate authenticators to participate in the
          * create() operation.
          */
-        public @This PublicKeyCredentialCreationOptionsBuilder authenticatorSelection(@NonNull AuthenticatorSelectionCriteria authenticatorSelection) {
+        public PublicKeyCredentialCreationOptionsBuilder authenticatorSelection(AuthenticatorSelectionCriteria authenticatorSelection) {
             return this.authenticatorSelection(Optional.of(authenticatorSelection));
         }
     }

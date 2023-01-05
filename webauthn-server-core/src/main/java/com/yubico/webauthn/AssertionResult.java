@@ -40,8 +40,6 @@ import lombok.Value;
 /**
  * The result of a call to {@link RelyingParty#finishAssertion(FinishAssertionOptions)}.
  */
-@Value
-@Builder(toBuilder = true)
 public class AssertionResult {
 
     /**
@@ -56,7 +54,6 @@ public class AssertionResult {
      * @see <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#credential-id">Credential ID</a>
      * @see PublicKeyCredentialRequestOptions#getAllowCredentials()
      */
-    @NonNull
     private final ByteArray credentialId;
 
     /**
@@ -67,7 +64,6 @@ public class AssertionResult {
      * @see UserIdentity#getId()
      * @see #getUsername()
      */
-    @NonNull
     private final ByteArray userHandle;
 
     /**
@@ -75,7 +71,6 @@ public class AssertionResult {
      *
      * @see #getUserHandle()
      */
-    @NonNull
     private final String username;
 
     /**
@@ -105,18 +100,16 @@ public class AssertionResult {
     /**
      * Zero or more human-readable messages about non-critical issues.
      */
-    @NonNull
     private final List<String> warnings;
 
-    @JsonCreator
     private AssertionResult(
-        @JsonProperty("success") boolean success,
-        @NonNull @JsonProperty("credentialId") ByteArray credentialId,
-        @NonNull @JsonProperty("userHandle") ByteArray userHandle,
-        @NonNull @JsonProperty("username") String username,
-        @JsonProperty("signatureCount") long signatureCount,
-        @JsonProperty("signatureCounterValid") boolean signatureCounterValid,
-        @NonNull @JsonProperty("warnings") List<String> warnings
+        boolean success,
+        ByteArray credentialId,
+        ByteArray userHandle,
+        String username,
+        long signatureCount,
+        boolean signatureCounterValid,
+        List<String> warnings
     ) {
         this.success = success;
         this.credentialId = credentialId;

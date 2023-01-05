@@ -200,8 +200,8 @@ public class WebAuthnServer {
     }
 
     public Either<String, RegistrationRequest> startRegistration(
-        @NonNull String username,
-        @NonNull String displayName,
+        String username,
+        String displayName,
         Optional<String> credentialNickname,
         boolean requireResidentKey
     ) {
@@ -235,7 +235,7 @@ public class WebAuthnServer {
     }
 
     public <T> Either<List<String>, AssertionRequestWrapper> startAddCredential(
-        @NonNull String username,
+        String username,
         Optional<String> credentialNickname,
         boolean requireResidentKey,
         Function<RegistrationRequest, Either<List<String>, T>> whenAuthenticated
@@ -277,7 +277,6 @@ public class WebAuthnServer {
         }
     }
 
-    @Value
     public static class SuccessfulRegistrationResult {
         final boolean success = true;
         RegistrationRequest request;
@@ -285,7 +284,6 @@ public class WebAuthnServer {
         CredentialRegistration registration;
         boolean attestationTrusted;
         Optional<AttestationCertInfo> attestationCert;
-        @JsonSerialize(using = AuthDataSerializer.class)
         AuthenticatorData authData;
 
         public SuccessfulRegistrationResult(RegistrationRequest request, RegistrationResponse response, CredentialRegistration registration, boolean attestationTrusted) {
@@ -310,7 +308,6 @@ public class WebAuthnServer {
 
     }
 
-    @Value
     public class SuccessfulU2fRegistrationResult {
         final boolean success = true;
         final RegistrationRequest request;
@@ -320,7 +317,6 @@ public class WebAuthnServer {
         Optional<AttestationCertInfo> attestationCert;
     }
 
-    @Value
     public static class AttestationCertInfo {
         final ByteArray der;
         final String text;
@@ -477,14 +473,12 @@ public class WebAuthnServer {
         }
     }
 
-    @Value
-    @AllArgsConstructor
     public static final class SuccessfulAuthenticationResult {
         private final boolean success = true;
         private final AssertionRequestWrapper request;
         private final AssertionResponse response;
         private final Collection<CredentialRegistration> registrations;
-        @JsonSerialize(using = AuthDataSerializer.class) AuthenticatorData authData;
+        AuthenticatorData authData;
         private final List<String> warnings;
 
         public SuccessfulAuthenticationResult(AssertionRequestWrapper request, AssertionResponse response, Collection<CredentialRegistration> registrations, List<String> warnings) {

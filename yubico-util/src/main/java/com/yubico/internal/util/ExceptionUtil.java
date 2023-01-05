@@ -27,7 +27,6 @@ package com.yubico.internal.util;
 import lombok.experimental.UtilityClass;
 import org.slf4j.Logger;
 
-@UtilityClass
 public class ExceptionUtil {
 
     public static RuntimeException wrapAndLog(Logger log, String message, Throwable t) {

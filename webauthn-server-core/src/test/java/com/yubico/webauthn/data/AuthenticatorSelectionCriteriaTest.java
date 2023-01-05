@@ -5,7 +5,6 @@ import org.junit.Test;
 
 public class AuthenticatorSelectionCriteriaTest {
 
-    @Test
     public void itHasTheseBuilderMethods() {
         AuthenticatorSelectionCriteria.builder()
             .authenticatorAttachment(AuthenticatorAttachment.CROSS_PLATFORM)

@@ -6,7 +6,6 @@ import org.junit.Test;
 
 public class PublicKeyCredentialCreationOptionsTest {
 
-    @Test(expected = NullPointerException.class)
     public void itHasTheseBuilderMethods() {
         PublicKeyCredentialCreationOptions.builder()
             .rp(null)

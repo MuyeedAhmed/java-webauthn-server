@@ -44,7 +44,6 @@ import lombok.Value;
  * About Public Key Credential (interface AuthenticatorAttestationResponse)
  * </a>
  */
-@Value
 public class AuthenticatorAttestationResponse implements AuthenticatorResponse {
 
     /**
@@ -59,36 +58,26 @@ public class AuthenticatorAttestationResponse implements AuthenticatorResponse {
      * Attestation Object</a>, and <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#fig-attStructs">Figure
      * 5</a>.
      */
-    @NonNull
     private final ByteArray attestationObject;
 
-    @NonNull
-    @Getter(onMethod = @__({ @Override }))
     private final ByteArray clientDataJSON;
 
     /**
      * The {@link #attestationObject} parsed as a domain object.
      */
-    @NonNull
-    @JsonIgnore
     private final transient AttestationObject attestation;
 
-    @NonNull
-    @JsonIgnore
-    @Getter(onMethod = @__({ @Override }))
     private final transient CollectedClientData clientData;
 
     @Override
-    @JsonIgnore
     public ByteArray getAuthenticatorData() {
         return attestation.getAuthenticatorData().getBytes();
     }
 
-    @Builder//(toBuilder = true)
-    @JsonCreator
+    //(toBuilder = true)
     private AuthenticatorAttestationResponse(
-        @NonNull @JsonProperty("attestationObject") ByteArray attestationObject,
-        @NonNull @JsonProperty("clientDataJSON") ByteArray clientDataJSON
+        ByteArray attestationObject,
+        ByteArray clientDataJSON
     ) throws IOException, Base64UrlException {
         this.attestationObject = attestationObject;
         this.clientDataJSON = clientDataJSON;

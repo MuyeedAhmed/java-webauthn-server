@@ -38,14 +38,11 @@ import org.checkerframework.checker.returnsrcvr.qual.This;
 /**
  * Parameters for {@link RelyingParty#finishRegistration(FinishRegistrationOptions)}.
  */
-@Value
-@Builder(toBuilder = true)
 public class FinishRegistrationOptions {
 
     /**
      * The request that the {@link #getResponse() response} is a response to.
      */
-    @NonNull
     private final PublicKeyCredentialCreationOptions request;
 
     /**
@@ -53,7 +50,6 @@ public class FinishRegistrationOptions {
      *
      * <a href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#createCredential">navigator.credentials.create()</a>
      */
-    @NonNull
     private final PublicKeyCredential<AuthenticatorAttestationResponse, ClientRegistrationExtensionOutputs> response;
 
     /**
@@ -62,8 +58,6 @@ public class FinishRegistrationOptions {
      *
      * @see <a href="https://tools.ietf.org/html/rfc8471">The Token Binding Protocol Version 1.0</a>
      */
-    @NonNull
-    @Builder.Default
     private final Optional<ByteArray> callerTokenBindingId = Optional.empty();
 
     public static class FinishRegistrationOptionsBuilder {
@@ -73,7 +67,7 @@ public class FinishRegistrationOptions {
          *
          * @see <a href="https://tools.ietf.org/html/rfc8471">The Token Binding Protocol Version 1.0</a>
          */
-        public @This FinishRegistrationOptionsBuilder callerTokenBindingId(@NonNull Optional<ByteArray> callerTokenBindingId) {
+        public FinishRegistrationOptionsBuilder callerTokenBindingId(Optional<ByteArray> callerTokenBindingId) {
             this.callerTokenBindingId = callerTokenBindingId;
             this.callerTokenBindingId$set = true;
             return this;
@@ -85,7 +79,7 @@ public class FinishRegistrationOptions {
          *
          * @see <a href="https://tools.ietf.org/html/rfc8471">The Token Binding Protocol Version 1.0</a>
          */
-        public @This FinishRegistrationOptionsBuilder callerTokenBindingId(@NonNull ByteArray callerTokenBindingId) {
+        public FinishRegistrationOptionsBuilder callerTokenBindingId(ByteArray callerTokenBindingId) {
             return this.callerTokenBindingId(Optional.of(callerTokenBindingId));
         }
     }

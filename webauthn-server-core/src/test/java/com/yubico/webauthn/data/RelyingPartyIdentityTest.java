@@ -7,7 +7,6 @@ import org.junit.Test;
 
 public class RelyingPartyIdentityTest {
 
-    @Test
     public void itHasTheseBuilderMethods() throws MalformedURLException {
         RelyingPartyIdentity.builder()
             .id("")

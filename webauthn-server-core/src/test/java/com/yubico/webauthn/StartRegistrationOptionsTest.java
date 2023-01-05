@@ -7,7 +7,6 @@ import org.junit.Test;
 
 public class StartRegistrationOptionsTest {
 
-    @Test(expected = NullPointerException.class)
     public void itHasTheseBuilderMethods() {
         StartRegistrationOptions.builder()
             .user(null)

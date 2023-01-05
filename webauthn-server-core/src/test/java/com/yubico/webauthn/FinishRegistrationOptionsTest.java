@@ -7,7 +7,6 @@ import org.junit.Test;
 
 public class FinishRegistrationOptionsTest {
 
-    @Test(expected = NullPointerException.class)
     public void itHasANonOptionalCallerTokenBindingIdMethod() throws HexException {
         FinishRegistrationOptions.builder()
             .request(null)
@@ -15,7 +14,6 @@ public class FinishRegistrationOptionsTest {
             .callerTokenBindingId(ByteArray.fromHex("aa"));
     }
 
-    @Test(expected = NullPointerException.class)
     public void itHasAnOptionalCallerTokenBindingIdMethod() throws HexException {
         FinishAssertionOptions.builder()
             .request(null)

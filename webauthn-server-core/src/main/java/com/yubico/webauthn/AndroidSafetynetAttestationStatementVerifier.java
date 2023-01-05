@@ -27,7 +27,6 @@ import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.conn.ssl.DefaultHostnameVerifier;
 
-@Slf4j
 class AndroidSafetynetAttestationStatementVerifier implements AttestationStatementVerifier, X5cAttestationStatementVerifier {
 
     private final BouncyCastleCrypto crypto = new BouncyCastleCrypto();
@@ -138,7 +137,6 @@ class AndroidSafetynetAttestationStatementVerifier implements AttestationStateme
         }
     }
 
-    @Value
     private static class JsonWebSignatureCustom {
         public final JsonNode header;
         public final JsonNode payload;

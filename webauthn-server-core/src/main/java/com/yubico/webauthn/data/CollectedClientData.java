@@ -47,19 +47,13 @@ import lombok.Value;
  * in WebAuthn Signatures (dictionary CollectedClientData)
  * </a>
  */
-@Value
-@JsonSerialize(using = CollectedClientData.JsonSerializer.class)
 public class CollectedClientData {
 
     /**
      * The client data returned from the client.
      */
-    @NonNull
-    @Getter(AccessLevel.NONE)
     private final ByteArray clientDataJson;
 
-    @NonNull
-    @Getter(AccessLevel.NONE)
     private final transient ObjectNode clientData;
 
     /**
@@ -67,24 +61,20 @@ public class CollectedClientData {
      * href="https://www.w3.org/TR/2019/PR-webauthn-20190117/#cryptographic-challenges">§13.1 Cryptographic
      * Challenges</a> security consideration.
      */
-    @NonNull
     private final transient ByteArray challenge;
 
     /**
      * The fully qualified origin of the requester, as provided to the authenticator by the client, in the syntax
      * defined by <a href="https://tools.ietf.org/html/rfc6454">RFC 6454</a>.
      */
-    @NonNull
     private final transient String origin;
 
     /**
      * The type of the requested operation, set by the client.
      */
-    @NonNull
     private final transient String type;
 
-    @JsonCreator
-    public CollectedClientData(@NonNull ByteArray clientDataJSON) throws IOException, Base64UrlException {
+    public CollectedClientData(ByteArray clientDataJSON) throws IOException, Base64UrlException {
         JsonNode clientData = JacksonCodecs.json().readTree(clientDataJSON.getBytes());
 
         ExceptionUtil.assure(
